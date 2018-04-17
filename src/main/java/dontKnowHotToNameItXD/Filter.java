@@ -1,6 +1,4 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.Map;
+package dontKnowHotToNameItXD;
 
 public class Filter {
 
