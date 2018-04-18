@@ -1,6 +1,7 @@
 package dontKnowHotToNameItXD;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Search {
             new Filter("piesni//", true), //5
     };
 
-    private List<List<File>> songs = new ArrayList<>();
+    private List<File> songs = new ArrayList<>();
 
     public void newSearch(String text) {
     songs.clear();
@@ -27,10 +28,22 @@ public class Search {
     }
 }
 
+
     private void search(String text, String directory) {
          File dir = new File(directory);
 
-         songs.add(Arrays.asList(dir.listFiles((dir1, name) -> name.startsWith(text) && name.endsWith(".pptx"))));
+        File [] files = dir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".pptx");
+            }
+        });
+
+        if(files != null)
+        for (File a:files)
+          songs.add(a);
+
+
     }
 
     // test
