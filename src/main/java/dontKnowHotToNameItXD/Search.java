@@ -19,13 +19,14 @@ public class Search {
 
     private List<File> songs = new ArrayList<>();
 
-    public void newSearch(String text) {
+    public List<File> newSearch(String text) {
     songs.clear();
 
     for (Filter filter : filters) {
         if (filter.getState())
            search(text,filter.getPath());
     }
+        return songs;
 }
 
 
@@ -43,15 +44,18 @@ public class Search {
         for (File a:files)
           songs.add(a);
 
-
     }
 
     // test
     public static void main(String[] args) {
         Search test = new Search();
 
-        test.newSearch("gorzkie");
-        System.out.println(test.songs);
+        List<File> list = test.newSearch("gorz");
+//        System.out.println(test.songs);
+        for(File f : list) {
+            System.out.println(f.getName());
+        }
+
 
     }
 
