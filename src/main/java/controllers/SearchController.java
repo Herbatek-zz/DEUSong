@@ -38,15 +38,11 @@ public class SearchController implements Initializable {
 
     @FXML
     private void search(KeyEvent event) {
+        list.clear();
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         songNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        list.addAll(search.newSearch(searchBar.getText()));
         songsTableView.getItems().setAll(list);
-        List<File> list = search.newSearch(searchBar.getText());
-
-        for(File f : list) {
-            System.out.println(f.getName());
-        }
-
     }
 
     @Override

@@ -2,7 +2,7 @@ package dontKnowHotToNameItXD;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Song {
+public class Song{
 
     private SimpleStringProperty title;
     private SimpleStringProperty category;
