@@ -14,30 +14,54 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
+<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
    <children>
-      <FlowPane hgap="20.0" layoutX="514.0" layoutY="107.0" maxHeight="346.0" maxWidth="265.0" prefHeight="302.0" prefWidth="173.0" vgap="20.0">
+      <FlowPane hgap="20.0" layoutX="514.0" layoutY="74.0" maxHeight="346.0" maxWidth="265.0" prefHeight="325.0" prefWidth="126.0" vgap="20.0">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="48.0" prefWidth="100.0" text="Boże Narodzenie" textAlignment="CENTER">
+            <ToggleButton fx:id="christmas" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="48.0" prefWidth="100.0" text="Kolędy" wrapText="true">
                <font>
-                  <Font size="10.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Wielkanoc">
+                  <Font size="16.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="easter" mnemonicParsing="false" onAction="#easterCategory" prefHeight="48.0" prefWidth="100.0" text="Wielkanoc" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="10.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Wielki post">
+                  <Font size="16.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets top="-10.0" />
+               </FlowPane.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="post" mnemonicParsing="false" onAction="#postCategory" prefHeight="62.0" prefWidth="100.0" text="Wielki post" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="10.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Wszystkich świętych">
+                  <Font size="16.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets top="-10.0" />
+               </FlowPane.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="saint" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saintCategory" prefHeight="67.0" prefWidth="100.0" text="Wszystkich świętych" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="10.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Tradycyjne">
+                  <Font size="16.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets top="-10.0" />
+               </FlowPane.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="traditional" mnemonicParsing="false" onAction="#traditionalCategory" prefHeight="48.0" prefWidth="100.0" text="Tradycyjne" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="10.0" />
-               </font></Button>
+                  <Font size="16.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets top="-10.0" />
+               </FlowPane.margin></ToggleButton>
+            <ToggleButton fx:id="adwent" mnemonicParsing="false" onAction="#adwentCategory" prefHeight="48.0" prefWidth="100.0" text="Adwent">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets top="-10.0" />
+               </FlowPane.margin>
+            </ToggleButton>
          </children>
          <padding>
             <Insets left="15.0" right="5.0" top="5.0" />
@@ -51,7 +75,7 @@
         </columns>
       </TableView>
       <TextField fx:id="searchBar" layoutX="43.0" layoutY="29.0" onKeyReleased="#search" prefHeight="44.0" prefWidth="467.0" promptText="Wpisz nazwę pieśni" />
-      <ToggleButton layoutX="529.0" layoutY="35.0" mnemonicParsing="false" text="Tryb jasny / ciemny" /> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
+      <ToggleButton fx:id="lightdark" layoutX="529.0" layoutY="35.0" mnemonicParsing="false" onAction="#changeBackground" text="Tryb jasny / ciemny" /> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
       <ImageView fitHeight="400.0" fitWidth="607.0" layoutX="660.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="file:/C:/Users/Lenovo/Pictures/Saved%20Pictures/2560x1600.jpg" /> <!--- Tutaj jest wczytywany podgląd -->
@@ -71,7 +95,7 @@
       <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="147.0" layoutY="554.0" />
       <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="432.0" layoutY="554.0" />
       <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="576.0" layoutY="553.0" />
-      <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="454.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
+      <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="312.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
          <children>
             <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
                <font>
@@ -81,14 +105,15 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Wyczyść">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
          </children>
          <padding>
             <Insets left="10.0" top="10.0" />
          </padding>
       </FlowPane>
+      <Button layoutX="921.0" layoutY="645.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" text="Wyczyść kolejke">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -10,8 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.net.URL;
@@ -32,6 +34,30 @@ public class SearchController implements Initializable {
 
     @FXML
     private TextField searchBar;
+
+    @FXML
+    private ToggleButton christmas;
+
+    @FXML
+    private ToggleButton easter;
+
+    @FXML
+    private ToggleButton post;
+
+    @FXML
+    private ToggleButton traditional;
+
+    @FXML
+    private ToggleButton saint;
+
+    @FXML
+    private ToggleButton adwent;
+
+    @FXML
+    private ToggleButton lightdark;
+
+    @FXML
+    private AnchorPane bg;
 
     private ObservableList<Song> list = FXCollections.observableArrayList();
 
@@ -64,11 +90,99 @@ public class SearchController implements Initializable {
     @FXML
     private void christmasCategory() {
         Filter[] filters = search.getFilters();
-        if(search.isAllFiltersTrue(filters)) {
-            search.setAllFiltersFalse(filters);
-            filters[4].setState(true);
+        if(christmas.isSelected()) {
+            if(search.isAllFiltersTrue(filters)) {
+                search.setAllFiltersFalse(filters);
+                filters[4].setState(true);
+            }
+        }
+        else {
+            search.setAllFiltersTrue(filters);
+        }
+
+    }
+
+
+    @FXML
+    private void easterCategory() {
+        Filter[] filters = search.getFilters();
+        if (easter.isSelected()) {
+            if(search.isAllFiltersTrue(filters)) {
+                search.setAllFiltersFalse(filters);
+                filters[2].setState(true);
+            }
+        }
+        else {
+            search.setAllFiltersTrue(filters);
         }
     }
+
+    @FXML
+    private void postCategory() {
+        Filter[] filters = search.getFilters();
+        if (post.isSelected()) {
+            if (search.isAllFiltersTrue(filters)) {
+                search.setAllFiltersFalse(filters);
+                filters[1].setState(true);
+            }
+        }
+        else {
+            search.setAllFiltersTrue(filters);
+        }
+    }
+
+    @FXML
+    private void saintCategory() {
+        Filter[] filters = search.getFilters();
+        if (saint.isSelected()) {
+            if (search.isAllFiltersTrue(filters)) {
+                search.setAllFiltersFalse(filters);
+                filters[6].setState(true);
+            }
+        }
+        else {
+            search.setAllFiltersTrue(filters);
+        }
+    }
+
+    @FXML
+    private void traditionalCategory() {
+        Filter[] filters = search.getFilters();
+        if (traditional.isSelected()) {
+            if (search.isAllFiltersTrue(filters)) {
+                search.setAllFiltersFalse(filters);
+                filters[0].setState(true);
+            }
+        }
+        else {
+            search.setAllFiltersTrue(filters);
+        }
+    }
+
+    @FXML
+    private void adwentCategory() {
+        Filter[] filters = search.getFilters();
+        if (adwent.isSelected()) {
+            if (search.isAllFiltersTrue(filters)) {
+                search.setAllFiltersFalse(filters);
+                filters[3].setState(true);
+            }
+        }
+        else {
+            search.setAllFiltersTrue(filters);
+        }
+    }
+
+    @FXML
+    private void changeBackground() {
+        if (lightdark.isSelected()) {
+            bg.setStyle("-fx-background-color: #6C7A89");
+        }
+        else {
+            bg.setStyle("-fx-background-color: #FFFFFF");
+        }
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -13,6 +13,7 @@ public class Search {
             new Filter("adwent", true), //3
             new Filter("koledy", true), //4
             new Filter("", true), //5
+            new Filter("swiety", true), //6
     };
 
     private List<Song> songs = new ArrayList<>();
@@ -58,6 +59,12 @@ public class Search {
     public Filter[] setAllFiltersFalse(Filter[] filters) {
         for(Filter filter : filters)
             filter.setState(false);
+        return filters;
+    }
+
+    public Filter[] setAllFiltersTrue(Filter[] filters) {
+        for(Filter filter : filters)
+            filter.setState(true);
         return filters;
     }
 }
