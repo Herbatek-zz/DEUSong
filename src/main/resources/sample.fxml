@@ -43,24 +43,24 @@
             <Insets left="15.0" right="5.0" top="5.0" />
          </padding>
       </FlowPane>
-      <TableView layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0" > <!--- Podgląd dodanych pieśni do kolejki -->
+      <TableView layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
         <columns>
           <TableColumn prefWidth="48.0" text="Kolejka" />
           <TableColumn prefWidth="127.0" text="Kategoria" />
             <TableColumn prefWidth="239.0" text="Nazwa pieśni" />
         </columns>
       </TableView>
-      <TextField layoutX="43.0" layoutY="29.0" onKeyReleased="#search" prefHeight="44.0" prefWidth="467.0" promptText="Wpisz nazwę pieśni" />
+      <TextField fx:id="searchBar" layoutX="43.0" layoutY="29.0" onKeyReleased="#search" prefHeight="44.0" prefWidth="467.0" promptText="Wpisz nazwę pieśni" />
       <ToggleButton layoutX="529.0" layoutY="35.0" mnemonicParsing="false" text="Tryb jasny / ciemny" /> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
       <ImageView fitHeight="400.0" fitWidth="607.0" layoutX="660.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="file:/C:/Users/Lenovo/Pictures/Saved%20Pictures/2560x1600.jpg" /> <!--- Tutaj jest wczytywany podgląd -->
          </image>
       </ImageView>
-      <TableView layoutX="43.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0" fx:id="songsTableView" > <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
+      <TableView fx:id="songsTableView" layoutX="43.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
         <columns>
-          <TableColumn prefWidth="75.0" text="Kategoria" fx:id="categoryColumn" />
-          <TableColumn prefWidth="390.0" text="Nazwa pieśni" fx:id="songNameColumn" />
+          <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Kategoria" />
+          <TableColumn fx:id="songNameColumn" prefWidth="390.0" text="Nazwa pieśni" />
         </columns>
       </TableView>
       <Label layoutX="671.0" layoutY="24.0" prefHeight="28.0" prefWidth="77.0" text="Podgląd">

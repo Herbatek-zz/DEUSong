@@ -36,7 +36,7 @@ public class Search {
         File [] files = dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.endsWith(".pptx");
+                return name.contains(text) && name.endsWith(".pptx");
             }
         });
 
