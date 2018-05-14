@@ -18,7 +18,7 @@
    <children>
       <FlowPane hgap="20.0" layoutX="514.0" layoutY="107.0" maxHeight="346.0" maxWidth="265.0" prefHeight="302.0" prefWidth="173.0" vgap="20.0">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Boże Narodzenie" textAlignment="CENTER">
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="48.0" prefWidth="100.0" text="Boże Narodzenie" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font></Button>
@@ -77,7 +77,7 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="162.0" text="Dodaj do kolejki">
+            <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="162.0" text="Dodaj do kolejki">
                <font>
                   <Font size="18.0" />
                </font></Button>

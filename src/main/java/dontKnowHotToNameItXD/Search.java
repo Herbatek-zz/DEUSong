@@ -1,9 +1,7 @@
 package dontKnowHotToNameItXD;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Search {
@@ -41,4 +39,25 @@ public class Search {
 
     }
 
+    public Filter[] getFilters() {
+        return filters;
+    }
+
+    public void setFilters(Filter[] filters) {
+        this.filters = filters;
+    }
+
+    public boolean isAllFiltersTrue(Filter[] filters){
+        for(Filter filter : filters) {
+            if(!filter.getState())
+                return false;
+        }
+        return true;
+    }
+
+    public Filter[] setAllFiltersFalse(Filter[] filters) {
+        for(Filter filter : filters)
+            filter.setState(false);
+        return filters;
+    }
 }

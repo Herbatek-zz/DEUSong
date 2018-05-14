@@ -1,5 +1,6 @@
 package controllers;
 
+import dontKnowHotToNameItXD.Filter;
 import dontKnowHotToNameItXD.Search;
 import dontKnowHotToNameItXD.Song;
 import javafx.collections.FXCollections;
@@ -43,6 +44,30 @@ public class SearchController implements Initializable {
         songNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         list.addAll(search.newSearch(searchBar.getText()));
         songsTableView.getItems().setAll(list);
+    }
+
+    @FXML
+    private void addToQueue() {
+        System.out.println("klik");
+    }
+
+    @FXML
+    private void preview() {
+
+    }
+
+    @FXML
+    private void clearQueue() {
+
+    }
+
+    @FXML
+    private void christmasCategory() {
+        Filter[] filters = search.getFilters();
+        if(search.isAllFiltersTrue(filters)) {
+            search.setAllFiltersFalse(filters);
+            filters[4].setState(true);
+        }
     }
 
     @Override
