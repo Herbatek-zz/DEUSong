@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
+<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyListener" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
    <children>
       <FlowPane hgap="20.0" layoutX="514.0" layoutY="74.0" maxHeight="346.0" maxWidth="265.0" prefHeight="325.0" prefWidth="126.0" vgap="20.0">
          <children>
@@ -67,11 +67,11 @@
             <Insets left="15.0" right="5.0" top="5.0" />
          </padding>
       </FlowPane>
-      <TableView layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
+      <TableView fx:id="queueTableView" layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
         <columns>
-          <TableColumn prefWidth="48.0" text="Kolejka" />
-          <TableColumn prefWidth="127.0" text="Kategoria" />
-            <TableColumn prefWidth="239.0" text="Nazwa pieśni" />
+          <TableColumn fx:id="queueId" prefWidth="48.0" text="Kolejka" />
+          <TableColumn fx:id="queueCategory" prefWidth="127.0" text="Kategoria" />
+            <TableColumn fx:id="queueName" prefWidth="239.0" text="Nazwa pieśni" />
         </columns>
       </TableView>
       <TextField fx:id="searchBar" layoutX="43.0" layoutY="29.0" onKeyReleased="#search" prefHeight="44.0" prefWidth="467.0" promptText="Wpisz nazwę pieśni" />
@@ -97,11 +97,11 @@
       <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="576.0" layoutY="553.0" />
       <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="312.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
          <children>
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
+            <Button mnemonicParsing="false" onAction="#addToPreview" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="162.0" text="Dodaj do kolejki">
+            <Button mnemonicParsing="false" onAction="#addToQueue" onKeyPressed="#keyListener" prefHeight="48.0" prefWidth="162.0" text="Dodaj do kolejki">
                <font>
                   <Font size="18.0" />
                </font></Button>
@@ -110,7 +110,7 @@
             <Insets left="10.0" top="10.0" />
          </padding>
       </FlowPane>
-      <Button layoutX="921.0" layoutY="645.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" text="Wyczyść kolejke">
+      <Button layoutX="921.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="156.0" text="Wyczyść kolejke">
          <font>
             <Font size="18.0" />
          </font>

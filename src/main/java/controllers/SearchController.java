@@ -7,12 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
@@ -23,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
 
-    @FXML
+    @FXML // Tabela wyszukanych piesni
     private TableView<Song> songsTableView;
 
     @FXML
@@ -31,6 +29,19 @@ public class SearchController implements Initializable {
 
     @FXML
     private TableColumn<Song, String> songNameColumn;
+
+//    @FXML // Tabela kolejki piesni
+//    private TableView<Song> queueTableView;
+//
+//    @FXML
+//    private TableColumn<Song, String> queueId;
+//
+//    @FXML
+//    private TableColumn<Song, String> queueCategory;
+//
+//    @FXML
+//    private TableColumn<Song, String> queueName;
+
 
     @FXML
     private TextField searchBar;
@@ -74,17 +85,34 @@ public class SearchController implements Initializable {
 
     @FXML
     private void addToQueue() {
-        System.out.println("klik");
+        System.out.println("dodanie do kolejki");
     }
 
     @FXML
-    private void preview() {
-
+    private void addToPreview() {
+        System.out.println("dodanie do podgladu");
     }
 
     @FXML
     private void clearQueue() {
+        System.out.println("usunieto kolejke");
+    }
 
+
+    @FXML
+    private void keyListener(KeyEvent event) {
+        if (event.getCode() == KeyCode.NUMPAD1) { // START
+            addToQueue(); // dodane w celu testu  --- numpad1
+        }
+        if (event.getCode() == KeyCode.NUMPAD3) { // STOP
+            System.out.println("numpad3");
+        }
+        if (event.getCode() == KeyCode.NUMPAD7) { // DALEJ
+            System.out.println("numpad7");
+        }
+        if (event.getCode() == KeyCode.NUMPAD9) { // WSTECZ
+            System.out.println("numpad9");
+        }
     }
 
     @FXML
