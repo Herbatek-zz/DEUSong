@@ -2,6 +2,7 @@ package dontKnowHotToNameItXD;
 
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
+import org.apache.poi.hslf.record.Slide;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 
@@ -15,19 +16,20 @@ import java.io.IOException;
 public class SlideShow
 {
 
+    private BufferedImage img;
     private int slideNumber;
-    XMLSlideShow sShow;
-    java.util.List<XSLFSlide> slide;
-    Dimension size;
+    private XMLSlideShow sShow;
+    private  java.util.List<XSLFSlide> slide;
+    private Dimension size;
 
     SlideShow()
     {
 
     }
 
-    public BufferedImage Slide2Img(int id)
+    private BufferedImage Slide2Img(int id)
     {
-        BufferedImage img = new BufferedImage(size.width,size.width,BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(size.width,size.height,BufferedImage.TYPE_INT_RGB);
 
         Graphics2D graphics = img.createGraphics();
 
@@ -43,15 +45,17 @@ public class SlideShow
     }
 
 
-    public void open(String filename) {
+    public boolean open(String filename) {
+        boolean success = true;
         try {
             this.sShow = new XMLSlideShow(new FileInputStream(filename));
         } catch (IOException e) {
             e.printStackTrace();
+            success = false;
         }
         size = sShow.getPageSize();
         slide = sShow.getSlides();
-
+         return success;
     }
     public void end()
     {
@@ -64,33 +68,53 @@ public class SlideShow
 
 
 
+
+
     }
 
-    public void nextSlide()
+    public void firstSlide(Project disp)
     {
-        if(this.slide.size() > this.slideNumber)
-            this.slideNumber ++;
+        slideNumber=0;
+        img = Slide2Img(slideNumber);
+        disp.loadImage(img);
     }
 
-    public void prevSlide()
+
+
+
+    public void nextSlide(Project disp)
     {
-        if(this.slide.size() < this.slideNumber)
-            this.slideNumber --;
+        if(slide.size() > slideNumber) {
+            slideNumber++;
+            img = Slide2Img(slideNumber);
+            disp.loadImage(img);
+        }
+    }
+
+    public void prevSlide(Project disp)
+    {
+        if(0 < slideNumber){
+            slideNumber --;
+            img = Slide2Img(slideNumber);
+            disp.loadImage(img);
+        }
     }
 
     public static void main(String[] args) {
         Project display= new Project();
         SlideShow test=new SlideShow();
-        test.open("piesni//gorzkie żale cz.1.pptx");
 
-        test.slideNumber =0;
-        BufferedImage img = test.Slide2Img(test.slideNumber);
-        display.loadImage(img);
+        if(test.open("piesni//gorzkie żale cz.1.pptx"))
+        {
+            test.firstSlide(display);
 
-        test.slideNumber =0;
-        img = test.Slide2Img(test.slideNumber);
-        display.loadImage(img);
+            test.nextSlide(display);
 
+         }
+        else
+        {
+            System.out.print("Nie wczytano pieśni!");
+        }
 
 
         test.end();
