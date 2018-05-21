@@ -11,7 +11,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyListener" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
@@ -91,10 +90,6 @@
          <font>
             <Font size="21.0" />
          </font></Label>
-      <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="31.0" layoutY="553.0" />
-      <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="147.0" layoutY="554.0" />
-      <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="432.0" layoutY="554.0" />
-      <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="576.0" layoutY="553.0" />
       <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="312.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
          <children>
             <Button mnemonicParsing="false" onAction="#addToPreview" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
@@ -115,5 +110,9 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button layoutX="64.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong" text="Start" />
+      <Button layoutX="121.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
+      <Button layoutX="207.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSong" text="Następny" />
+      <Button layoutX="292.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSong" text="Poprzedni" />
    </children>
 </AnchorPane>

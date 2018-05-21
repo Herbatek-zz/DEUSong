@@ -85,11 +85,14 @@ public class SearchController implements Initializable {
 
     @FXML
     private void addToQueue() {
+        Song song = songsTableView.getSelectionModel().getSelectedItem();
+        System.out.println(song.getTitle());
         System.out.println("dodanie do kolejki");
     }
 
     @FXML
     private void addToPreview() {
+
         System.out.println("dodanie do podgladu");
     }
 
@@ -98,19 +101,38 @@ public class SearchController implements Initializable {
         System.out.println("usunieto kolejke");
     }
 
+    @FXML
+    private void playSong() {
+        System.out.println("start song");
+    }
+
+    @FXML
+    private void stopSong() {
+        System.out.println("stop song");
+    }
+
+    @FXML
+    private void nextSong() {
+        System.out.println("next Song");
+    }
+
+    @FXML
+    private void previousSong() {
+        System.out.println("previous Song");
+    }
 
     @FXML
     private void keyListener(KeyEvent event) {
-        if (event.getCode() == KeyCode.NUMPAD1) { // START
+        if (event.getCode() == KeyCode.NUMPAD1 || event.getCode() ==  KeyCode.DIGIT1) { // START
             addToQueue(); // dodane w celu testu  --- numpad1
         }
-        if (event.getCode() == KeyCode.NUMPAD3) { // STOP
+        if (event.getCode() == KeyCode.NUMPAD3 || event.getCode() == KeyCode.DIGIT3) { // STOP
             System.out.println("numpad3");
         }
-        if (event.getCode() == KeyCode.NUMPAD7) { // DALEJ
+        if (event.getCode() == KeyCode.NUMPAD7 || event.getCode() == KeyCode.DIGIT7) { // DALEJ
             System.out.println("numpad7");
         }
-        if (event.getCode() == KeyCode.NUMPAD9) { // WSTECZ
+        if (event.getCode() == KeyCode.NUMPAD9 || event.getCode() == KeyCode.DIGIT9) { // WSTECZ
             System.out.println("numpad9");
         }
     }
