@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class Project {
 
-    private JFrame f;
+    private JFrame frame;
     private Dimension screenSize = new Dimension();
 
     public Project()
@@ -14,7 +14,8 @@ public class Project {
         GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
         this.screenSize.width=gd[0].getDisplayMode().getWidth();
         this.screenSize.height=gd[0].getDisplayMode().getWidth();
-        f=new JFrame();
+        frame=new JFrame();
+        frame.setBackground(Color.black);
     }
 
     public static void showOnScreen ( int screen, JFrame frame ) {
@@ -37,14 +38,14 @@ public class Project {
 
 
     public  void loadImage (BufferedImage img) {
-        f.getContentPane().removeAll();
-        f.repaint();
-        f.getContentPane().add(new JLabel(new ImageIcon(img)));
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.getContentPane().add(new JLabel(new ImageIcon(img)));
 
-        f.pack();
-        f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        showOnScreen(0,f);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        showOnScreen(0,frame);
 
 
     }
