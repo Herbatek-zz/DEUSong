@@ -1,18 +1,20 @@
 package controllers;
 
-import dontKnowHotToNameItXD.Filter;
-import dontKnowHotToNameItXD.Search;
-import dontKnowHotToNameItXD.Song;
+import dontKnowHotToNameItXD.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +22,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
+
+    SlideShow slideShow = new SlideShow();
+    Project project= new Project();
+
+
+
 
     @FXML // Tabela wyszukanych piesni
     private TableView<Song> songsTableView;
@@ -88,6 +96,8 @@ public class SearchController implements Initializable {
         Song song = songsTableView.getSelectionModel().getSelectedItem();
         System.out.println(song.getTitle());
         System.out.println("dodanie do kolejki");
+
+
     }
 
     @FXML
@@ -103,6 +113,11 @@ public class SearchController implements Initializable {
 
     @FXML
     private void playSong() {
+
+        Song song = songsTableView.getSelectionModel().getSelectedItem();
+        System.out.println(song.getTitle());
+        slideShow.open(song.getPath());
+        slideShow.firstSlide(project);
         System.out.println("start song");
     }
 
@@ -125,12 +140,16 @@ public class SearchController implements Initializable {
     private void keyListener(KeyEvent event) {
         if (event.getCode() == KeyCode.NUMPAD1 || event.getCode() ==  KeyCode.DIGIT1) { // START
             addToQueue(); // dodane w celu testu  --- numpad1
+            slideShow.prevSlide(project);
         }
         if (event.getCode() == KeyCode.NUMPAD3 || event.getCode() == KeyCode.DIGIT3) { // STOP
+            slideShow.nextSlide(project);
             System.out.println("numpad3");
         }
         if (event.getCode() == KeyCode.NUMPAD7 || event.getCode() == KeyCode.DIGIT7) { // DALEJ
             System.out.println("numpad7");
+            slideShow.end();
+
         }
         if (event.getCode() == KeyCode.NUMPAD9 || event.getCode() == KeyCode.DIGIT9) { // WSTECZ
             System.out.println("numpad9");
@@ -236,6 +255,8 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
     }
 }

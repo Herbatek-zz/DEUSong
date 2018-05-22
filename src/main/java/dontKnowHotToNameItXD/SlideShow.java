@@ -5,7 +5,9 @@ import javafx.stage.Screen;
 import org.apache.poi.hslf.record.Slide;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
+import sun.awt.image.BufferedImageDevice;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -22,17 +24,12 @@ public class SlideShow
     private  java.util.List<XSLFSlide> slide;
     private Dimension size;
 
-    SlideShow()
-    {
-
-    }
 
     private BufferedImage Slide2Img(int id)
     {
-        BufferedImage img = new BufferedImage(size.width,size.height,BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(size.width ,size.height,BufferedImage.TYPE_INT_RGB);
 
         Graphics2D graphics = img.createGraphics();
-
         //clear the drawing area
         graphics.setPaint(Color.black);
         graphics.fill(new Rectangle2D.Float(0, 0, size.width, size.height));
@@ -40,6 +37,8 @@ public class SlideShow
         //  graphics.
         //render
         slide.get(id).draw(graphics);
+
+
         graphics.dispose();
         return img;
     }
@@ -104,11 +103,11 @@ public class SlideShow
         Project display= new Project();
         SlideShow test=new SlideShow();
 
-        if(test.open("piesni//gorzkie żale cz.1.pptx"))
+        if(test.open("piesni//gorzkie żale cz.3.pptx"))
         {
             test.firstSlide(display);
 
-            test.nextSlide(display);
+          // test.nextSlide(display);
 
          }
         else
