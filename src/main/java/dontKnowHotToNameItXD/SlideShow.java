@@ -22,7 +22,7 @@ public class SlideShow
     private int slideNumber;
     private XMLSlideShow sShow;
     private  java.util.List<XSLFSlide> slide;
-    private Dimension size;
+    private Dimension size; // czemu to nie jest zainicjalizowane :O
 
 
     private BufferedImage Slide2Img(int id)
