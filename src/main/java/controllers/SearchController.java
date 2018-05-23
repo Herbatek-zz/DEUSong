@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 public class SearchController implements Initializable {
 
     SlideShow slideShow = new SlideShow();
-    Project project= new Project();
+    Project project= new Project(slideShow);
 
 
 
