@@ -1,18 +1,12 @@
 package dontKnowHotToNameItXD;
 
-import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
-import org.apache.poi.hslf.record.Slide;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
-import sun.awt.image.BufferedImageDevice;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class SlideShow
@@ -22,7 +16,7 @@ public class SlideShow
     private int slideNumber;
     private XMLSlideShow sShow;
     private  java.util.List<XSLFSlide> slide;
-    private Dimension size; // czemu to nie jest zainicjalizowane :O
+    private Dimension size;
 
 
     private BufferedImage Slide2Img(int id)

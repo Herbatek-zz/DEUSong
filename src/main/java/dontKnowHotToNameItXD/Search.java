@@ -1,5 +1,8 @@
 package dontKnowHotToNameItXD;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,7 @@ public class Search {
     private void search(String text, String directory, String category) {
         File dir = new File(directory);
 
-        File [] files = dir.listFiles((dir1, name) -> name.contains(text) && name.endsWith(".pptx"));
+        File [] files = dir.listFiles((dir1, name) -> StringUtils.containsIgnoreCase(name, text) && name.endsWith(".pptx"));
 
         if(files != null)
             for (File a : files)
