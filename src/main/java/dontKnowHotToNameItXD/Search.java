@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Search {
 
-    private Filter[] filters ={
+    private Filter[] filters = {
             new Filter("zwykle", true), //0
             new Filter("wielki post", true), //1
             new Filter("wielkanoc", true), //2
@@ -22,22 +22,22 @@ public class Search {
     private List<Song> songs = new ArrayList<>();
 
     public List<Song> newSearch(String text) {
-    songs.clear();
+        songs.clear();
 
-    for (Filter filter : filters) {
-        if (filter.getState())
-           search(text, filter.getPath(), filter.getCategory());
-    }
+        for (Filter filter : filters) {
+            if (filter.getState())
+                search(text, filter.getPath(), filter.getCategory());
+        }
         return songs;
-}
+    }
 
 
     private void search(String text, String directory, String category) {
         File dir = new File(directory);
 
-        File [] files = dir.listFiles((dir1, name) -> StringUtils.containsIgnoreCase(name, text) && name.endsWith(".pptx"));
+        File[] files = dir.listFiles((dir1, name) -> StringUtils.containsIgnoreCase(name, text) && name.endsWith(".pptx"));
 
-        if(files != null)
+        if (files != null)
             for (File a : files)
                 songs.add(FileToSongConverter.toSong(a, category));
 
@@ -51,22 +51,22 @@ public class Search {
         this.filters = filters;
     }
 
-    public boolean isAllFiltersTrue(Filter[] filters){
-        for(Filter filter : filters) {
-            if(!filter.getState())
+    public boolean isAllFiltersTrue(Filter[] filters) {
+        for (Filter filter : filters) {
+            if (!filter.getState())
                 return false;
         }
         return true;
     }
 
     public Filter[] setAllFiltersFalse(Filter[] filters) {
-        for(Filter filter : filters)
+        for (Filter filter : filters)
             filter.setState(false);
         return filters;
     }
 
     public Filter[] setAllFiltersTrue(Filter[] filters) {
-        for(Filter filter : filters)
+        for (Filter filter : filters)
             filter.setState(true);
         return filters;
     }

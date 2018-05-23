@@ -24,9 +24,7 @@ import java.util.ResourceBundle;
 public class SearchController implements Initializable {
 
     SlideShow slideShow = new SlideShow();
-    Project project= new Project();
-
-
+    Project project = new Project();
 
 
     @FXML // Tabela wyszukanych piesni
@@ -138,34 +136,42 @@ public class SearchController implements Initializable {
 
     @FXML
     private void keyListener(KeyEvent event) {
-        if (event.getCode() == KeyCode.NUMPAD1 || event.getCode() ==  KeyCode.DIGIT1) { // START
-            addToQueue(); // dodane w celu testu  --- numpad1
-            slideShow.prevSlide(project);
-        }
-        if (event.getCode() == KeyCode.NUMPAD3 || event.getCode() == KeyCode.DIGIT3) { // STOP
-            slideShow.nextSlide(project);
-            System.out.println("numpad3");
-        }
-        if (event.getCode() == KeyCode.NUMPAD7 || event.getCode() == KeyCode.DIGIT7) { // DALEJ
-            System.out.println("numpad7");
-            slideShow.end();
-
-        }
-        if (event.getCode() == KeyCode.NUMPAD9 || event.getCode() == KeyCode.DIGIT9) { // WSTECZ
-            System.out.println("numpad9");
+        switch (event.getCode()) {
+            case NUMPAD1:
+            case DIGIT1: { // START
+                addToQueue();
+                slideShow.prevSlide(project);
+            }
+            break;
+            case NUMPAD3:
+            case DIGIT3: { // STOP
+                slideShow.nextSlide(project);
+                System.out.println("numpad3");
+            }
+            break;
+            case NUMPAD7:
+            case DIGIT7: { // DALEJ
+                System.out.println("numpad7");
+                slideShow.end();
+            }
+            break;
+            case NUMPAD9:
+            case DIGIT9: { // WSTECZ
+                System.out.println("numpad9");
+            }
+            break;
         }
     }
 
     @FXML
     private void christmasCategory() {
         Filter[] filters = search.getFilters();
-        if(christmas.isSelected()) {
-            if(search.isAllFiltersTrue(filters)) {
+        if (christmas.isSelected()) {
+            if (search.isAllFiltersTrue(filters)) {
                 search.setAllFiltersFalse(filters);
                 filters[4].setState(true);
             }
-        }
-        else {
+        } else {
             search.setAllFiltersTrue(filters);
         }
 
@@ -176,12 +182,11 @@ public class SearchController implements Initializable {
     private void easterCategory() {
         Filter[] filters = search.getFilters();
         if (easter.isSelected()) {
-            if(search.isAllFiltersTrue(filters)) {
+            if (search.isAllFiltersTrue(filters)) {
                 search.setAllFiltersFalse(filters);
                 filters[2].setState(true);
             }
-        }
-        else {
+        } else {
             search.setAllFiltersTrue(filters);
         }
     }
@@ -194,8 +199,7 @@ public class SearchController implements Initializable {
                 search.setAllFiltersFalse(filters);
                 filters[1].setState(true);
             }
-        }
-        else {
+        } else {
             search.setAllFiltersTrue(filters);
         }
     }
@@ -208,8 +212,7 @@ public class SearchController implements Initializable {
                 search.setAllFiltersFalse(filters);
                 filters[6].setState(true);
             }
-        }
-        else {
+        } else {
             search.setAllFiltersTrue(filters);
         }
     }
@@ -222,8 +225,7 @@ public class SearchController implements Initializable {
                 search.setAllFiltersFalse(filters);
                 filters[0].setState(true);
             }
-        }
-        else {
+        } else {
             search.setAllFiltersTrue(filters);
         }
     }
@@ -236,8 +238,7 @@ public class SearchController implements Initializable {
                 search.setAllFiltersFalse(filters);
                 filters[3].setState(true);
             }
-        }
-        else {
+        } else {
             search.setAllFiltersTrue(filters);
         }
     }
@@ -246,8 +247,7 @@ public class SearchController implements Initializable {
     private void changeBackground() {
         if (lightdark.isSelected()) {
             bg.setStyle("-fx-background-color: #6C7A89");
-        }
-        else {
+        } else {
             bg.setStyle("-fx-background-color: #FFFFFF");
         }
     }
@@ -255,7 +255,6 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
 
 
     }
