@@ -38,5 +38,5 @@ public class Song{
         this.category.set(category);
     }
 
-    public String getPath() { return path.get(); }
+    public String getPath() { return path.get(); } // czemu path.get, a nie po prostu path ? i czemu w jednej linii ?
 }
