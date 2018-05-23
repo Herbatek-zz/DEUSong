@@ -10,17 +10,15 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class SlideShow
-{
+public class SlideShow {
     private BufferedImage img;
     private int slideNumber;
     private XMLSlideShow sShow;
     private List<XSLFSlide> slide;
     private Dimension size;
 
-    private BufferedImage Slide2Img(int id)
-    {
-        BufferedImage img = new BufferedImage(size.width ,size.height,BufferedImage.TYPE_INT_RGB);
+    private BufferedImage Slide2Img(int id) {
+        BufferedImage img = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 
         Graphics2D graphics = img.createGraphics();
         //clear the drawing area
@@ -47,10 +45,10 @@ public class SlideShow
         }
         size = sShow.getPageSize();
         slide = sShow.getSlides();
-         return success;
+        return success;
     }
-    public void end()
-    {
+
+    public void end() {
         try {
             sShow.close();
         } catch (IOException e) {
@@ -58,44 +56,38 @@ public class SlideShow
         }
     }
 
-    public void firstSlide(Project disp)
-    {
-        slideNumber=0;
+    public void firstSlide(Project disp) {
+        slideNumber = 0;
         img = Slide2Img(slideNumber);
         disp.loadImage(img);
     }
 
-    public void nextSlide(Project disp)
-    {
-        if(slide.size() > slideNumber) {
+    public void nextSlide(Project disp) {
+        if (slide.size() > slideNumber) {
             slideNumber++;
             img = Slide2Img(slideNumber);
             disp.loadImage(img);
         }
     }
 
-    public void prevSlide(Project disp)
-    {
-        if(0 < slideNumber){
-            slideNumber --;
+    public void prevSlide(Project disp) {
+        if (0 < slideNumber) {
+            slideNumber--;
             img = Slide2Img(slideNumber);
             disp.loadImage(img);
         }
     }
 
     public static void main(String[] args) {
-        Project display= new Project();
-        SlideShow test=new SlideShow();
+        Project display = new Project();
+        SlideShow test = new SlideShow();
 
-        if(test.open("piesni//gorzkie żale cz.3.pptx"))
-        {
+        if (test.open("piesni//gorzkie żale cz.3.pptx")) {
             test.firstSlide(display);
 
-          // test.nextSlide(display);
+            // test.nextSlide(display);
 
-         }
-        else
-        {
+        } else {
             System.out.print("Nie wczytano pieśni!");
         }
         test.end();
