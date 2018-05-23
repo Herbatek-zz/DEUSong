@@ -1,29 +1,22 @@
 package dontKnowHotToNameItXD;
 
-import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
-import org.apache.poi.hslf.record.Slide;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
-import sun.awt.image.BufferedImageDevice;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
+import java.util.List;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class SlideShow
 {
-
     private BufferedImage img;
     private int slideNumber;
     private XMLSlideShow sShow;
-    private  java.util.List<XSLFSlide> slide;
-    private Dimension size; // czemu to nie jest zainicjalizowane :O
-
+    private List<XSLFSlide> slide;
+    private Dimension size;
 
     private BufferedImage Slide2Img(int id)
     {
@@ -63,12 +56,6 @@ public class SlideShow
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
     }
 
     public void firstSlide(Project disp)
@@ -77,9 +64,6 @@ public class SlideShow
         img = Slide2Img(slideNumber);
         disp.loadImage(img);
     }
-
-
-
 
     public void nextSlide(Project disp)
     {
@@ -114,8 +98,6 @@ public class SlideShow
         {
             System.out.print("Nie wczytano pieśni!");
         }
-
-
         test.end();
 
     }
