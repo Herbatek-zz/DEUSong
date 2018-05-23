@@ -138,20 +138,20 @@ public class SearchController implements Initializable {
 
     @FXML
     private void keyListener(KeyEvent event) {
-        if (event.getCode() == KeyCode.NUMPAD1 || event.getCode() ==  KeyCode.DIGIT1) { // START
+        if (event.getCode() == KeyCode.NUMPAD1 || event.getCode() ==  KeyCode.DIGIT1) { // poprzedni
             addToQueue(); // dodane w celu testu  --- numpad1
             slideShow.prevSlide(project);
         }
-        if (event.getCode() == KeyCode.NUMPAD3 || event.getCode() == KeyCode.DIGIT3) { // STOP
+        if (event.getCode() == KeyCode.NUMPAD3 || event.getCode() == KeyCode.DIGIT3) { // nastepny
             slideShow.nextSlide(project);
             System.out.println("numpad3");
         }
-        if (event.getCode() == KeyCode.NUMPAD7 || event.getCode() == KeyCode.DIGIT7) { // DALEJ
+        if (event.getCode() == KeyCode.NUMPAD7 || event.getCode() == KeyCode.DIGIT7) { // start/stop
             System.out.println("numpad7");
             slideShow.end();
 
         }
-        if (event.getCode() == KeyCode.NUMPAD9 || event.getCode() == KeyCode.DIGIT9) { // WSTECZ
+        if (event.getCode() == KeyCode.NUMPAD9 || event.getCode() == KeyCode.DIGIT9) { // nastepna piesn
             System.out.println("numpad9");
         }
     }

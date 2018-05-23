@@ -20,7 +20,7 @@ public class Project {
         this.screenSize.height=gd[0].getDisplayMode().getHeight();
         frame=new JFrame();
         frame.setBackground(Color.black);
-      //  loadBG();
+        loadBG();
         showOnScreen(0,frame);
     }
 
@@ -70,14 +70,17 @@ public class Project {
 
     }
 
-//    public void loadBG(){
-//        BufferedImage img =  new BufferedImage(screenSize.width,screenSize.height,BufferedImage.TYPE_INT_RGB);
-//       //img=ImageIO.read(new File="")
-//         File f = new File("default.jpg");
-//
-//            img=ImageIO.read(f);
-//            loadImage(img);
-//    }
+    public void loadBG(){
+
+        BufferedImage img;
+        try {
+            img = ImageIO.read(getClass().getResource("/obrazy/default.jpg"));
+            loadImage(img);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 }
