@@ -25,7 +25,7 @@ public class SearchController implements Initializable {
 
     SlideShow slideShow = new SlideShow();
     Project project= new Project(slideShow);
-
+    boolean isProjecting = false;
 
     @FXML // Tabela wyszukanych piesni
     private TableView<Song> songsTableView;
@@ -90,18 +90,16 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void addToQueue() {
-        Song song = songsTableView.getSelectionModel().getSelectedItem();
-        System.out.println(song.getTitle());
-        System.out.println("dodanie do kolejki");
-
+    private void addToQueue() {  //wypierdol to razem z guzikem
 
     }
 
     @FXML
     private void addToPreview() {
+        Song song = songsTableView.getSelectionModel().getSelectedItem();
+        System.out.println(song.getTitle());
+        slideShow.open(song.getPath());
 
-        System.out.println("dodanie do podgladu");
     }
 
     @FXML
@@ -112,51 +110,56 @@ public class SearchController implements Initializable {
     @FXML
     private void playSong() {
 
-        Song song = songsTableView.getSelectionModel().getSelectedItem();
-        System.out.println(song.getTitle());
-        slideShow.open(song.getPath());
-        slideShow.firstSlide(project);
+
+        slideShow.CurrentSlide(project);
         System.out.println("start song");
+        isProjecting=true;
     }
 
     @FXML
     private void stopSong() {
         System.out.println("stop song");
+      //  slideShow.end();
+        project.loadBG();
+        isProjecting=false;
     }
 
     @FXML
-    private void nextSong() {
-        System.out.println("next Song");
+    private void nextSong() {       //Zmien nazwę na nextSlide
+        slideShow.nextSlide(project);
     }
 
     @FXML
-    private void previousSong() {
-        System.out.println("previous Song");
+    private void previousSong() {   //Zmien nazwe na previousSlide
+        slideShow.prevSlide(project);
     }
 
     @FXML
     private void keyListener(KeyEvent event) {
         switch (event.getCode()) {
             case NUMPAD1:
-            case DIGIT1: { // START
-                addToQueue();
-                slideShow.prevSlide(project);
+            case DIGIT1: { // Poprzedni
+              previousSong();
             }
             break;
             case NUMPAD3:
-            case DIGIT3: { // STOP
-                slideShow.nextSlide(project);
-                System.out.println("numpad3");
+            case DIGIT3: { // Następny
+            nextSong();
             }
             break;
             case NUMPAD7:
-            case DIGIT7: { // DALEJ
-                System.out.println("numpad7");
-                slideShow.end();
+            case DIGIT7: { // Start/Stop
+                if(isProjecting)
+                {
+                    stopSong();
+                }
+                else{
+                    playSong();
+                }
             }
             break;
             case NUMPAD9:
-            case DIGIT9: { // WSTECZ
+            case DIGIT9: { // Następna piesn
                 System.out.println("numpad9");
             }
             break;

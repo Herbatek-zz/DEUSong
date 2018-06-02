@@ -45,6 +45,7 @@ public class SlideShow {
         }
         size = sShow.getPageSize();
         slide = sShow.getSlides();
+        slideNumber=0;
         return success;
     }
 
@@ -56,8 +57,8 @@ public class SlideShow {
         }
     }
 
-    public void firstSlide(Project disp) {
-        slideNumber = 0;
+    public void CurrentSlide(Project disp) {
+
         img = Slide2Img(slideNumber);
         disp.loadImage(img);
     }
