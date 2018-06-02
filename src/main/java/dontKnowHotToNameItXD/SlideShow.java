@@ -78,19 +78,5 @@ public class SlideShow {
         }
     }
 
-    public static void main(String[] args) {
-        Project display = new Project();
-        SlideShow test = new SlideShow();
 
-        if (test.open("piesni//gorzkie żale cz.3.pptx")) {
-            test.firstSlide(display);
-
-            // test.nextSlide(display);
-
-        } else {
-            System.out.print("Nie wczytano pieśni!");
-        }
-        test.end();
-
-    }
 }

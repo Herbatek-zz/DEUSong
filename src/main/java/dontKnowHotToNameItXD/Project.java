@@ -21,8 +21,11 @@ public class Project implements KeyListener {
         this.screenSize.height = gd[0].getDisplayMode().getHeight();
         frame = new JFrame();
         frame.setBackground(Color.black);
+
         loadBG();
-        showOnScreen(0, frame);
+        showOnScreen(1, frame);
+        frame.setVisible(true);
+
     }
 
     public static void showOnScreen(int screen, JFrame frame) {
@@ -31,7 +34,9 @@ public class Project implements KeyListener {
         GraphicsDevice[] gs = ge.getScreenDevices();
         if (screen > -1 && screen < gs.length) {
             gs[screen].setFullScreenWindow(frame);
-        } else if (gs.length > 0) {
+
+
+        } else if (gs.length == 0) {
             gs[0].setFullScreenWindow(frame);
 
         } else {
@@ -60,8 +65,8 @@ public class Project implements KeyListener {
         frame.getContentPane().add(new JLabel(new ImageIcon(resizeImage(img))));
 
         frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+       // frame.setLocationRelativeTo(null);
+       // frame.setVisible(true);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
 
@@ -76,8 +81,13 @@ public class Project implements KeyListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        frame.setState(Frame.MAXIMIZED_BOTH);
     }
+
+public void fix()
+{
+    this.frame.setState(Frame.MAXIMIZED_BOTH);
+}
 
 
     private void slideControl(){
