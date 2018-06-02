@@ -246,9 +246,10 @@ public class SearchController implements Initializable {
     @FXML
     private void changeBackground() {
         if (lightdark.isSelected()) {
-            bg.setStyle("-fx-background-color: #6C7A89");
+            bg.getStylesheets().add("styles.css");
         } else {
-            bg.setStyle("-fx-background-color: #FFFFFF");
+            bg.getStylesheets().clear();
+            bg.setStyle(null);
         }
     }
 
