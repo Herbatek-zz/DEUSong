@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,110 +16,115 @@
 
 <AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyListener" onMouseClicked="#unfocus" prefHeight="720.0" prefWidth="1280.0" styleClass="bg" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
     <children>
-      <FlowPane hgap="20.0" layoutX="514.0" layoutY="74.0" maxHeight="346.0" maxWidth="265.0" prefHeight="325.0" prefWidth="126.0" vgap="20.0">
-         <children>
-            <ToggleButton fx:id="christmas" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Kolędy" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </ToggleButton>
-            <ToggleButton fx:id="easter" mnemonicParsing="false" onAction="#easterCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Wielkanoc" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <FlowPane.margin>
-                  <Insets top="-10.0" />
-               </FlowPane.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="post" mnemonicParsing="false" onAction="#postCategory" prefHeight="62.0" prefWidth="120.0" styleClass="button" text="Wielki post" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <FlowPane.margin>
-                  <Insets top="-10.0" />
-               </FlowPane.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="saint" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saintCategory" prefHeight="67.0" prefWidth="120.0" styleClass="button" text="Wszystkich świętych" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <FlowPane.margin>
-                  <Insets top="-10.0" />
-               </FlowPane.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="traditional" mnemonicParsing="false" onAction="#traditionalCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Tradycyjne" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <FlowPane.margin>
-                  <Insets top="-10.0" />
-               </FlowPane.margin></ToggleButton>
-            <ToggleButton fx:id="adwent" mnemonicParsing="false" onAction="#adwentCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Adwent">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <FlowPane.margin>
-                  <Insets top="-10.0" />
-               </FlowPane.margin>
-            </ToggleButton>
-         </children>
-         <padding>
-            <Insets left="15.0" right="5.0" top="5.0" />
-         </padding>
-      </FlowPane>
-      <TableView fx:id="queueTableView" layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
-          <placeholder>
-          <Label text="" />
-          </placeholder>
-        <columns>
-          <TableColumn fx:id="queueId" prefWidth="52.0" text="Kolejka" />
-          <TableColumn fx:id="queueCategory" prefWidth="127.0" text="Kategoria" />
-            <TableColumn fx:id="queueName" prefWidth="239.0" text="Nazwa pieśni" />
-        </columns>
-      </TableView>
-      <TextField fx:id="searchBar" layoutX="43.0" layoutY="29.0" onKeyReleased="#search" prefHeight="44.0" prefWidth="467.0" promptText="Wpisz nazwę pieśni" />
-      <ToggleButton fx:id="lightdark" layoutX="529.0" layoutY="35.0" mnemonicParsing="false" onAction="#changeBackground" text="Tryb jasny / ciemny" /> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
-      <ImageView fitHeight="400.0" fitWidth="607.0" layoutX="680.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Lenovo/Pictures/Saved%20Pictures/2560x1600.jpg" /> <!--- Tutaj jest wczytywany podgląd -->
-         </image>
-      </ImageView>
-      <TableView fx:id="songsTableView" layoutX="43.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
-          <placeholder>
-              <Label text="" />
-          </placeholder>
-        <columns>
-          <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Kategoria" />
-          <TableColumn fx:id="songNameColumn" prefWidth="390.0" text="Nazwa pieśni" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <Label layoutX="671.0" layoutY="24.0" prefHeight="28.0" prefWidth="87.0" text="Podgląd">
-         <font>
-            <Font size="21.0" />
-         </font></Label>
-      <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="128.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
-         <children>
-            <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
-         </children>
-         <padding>
-            <Insets left="10.0" top="10.0" />
-         </padding>
-      </FlowPane>
-      <Button layoutX="921.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wyczyść kolejkę">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="64.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong" text="Start" />
-      <Button layoutX="121.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
-      <Button layoutX="207.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide" text="Następny" />
-      <Button layoutX="292.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide" text="Poprzedni" />
-   </children>
+        <FlowPane hgap="20.0" layoutX="514.0" layoutY="74.0" maxHeight="346.0" maxWidth="265.0" prefHeight="325.0" prefWidth="126.0" vgap="20.0">
+            <children>
+                <ToggleButton fx:id="christmas" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Kolędy" wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="category" />
+               </toggleGroup>
+                </ToggleButton>
+                <ToggleButton fx:id="easter" mnemonicParsing="false" onAction="#easterCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Wielkanoc" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <FlowPane.margin>
+                        <Insets top="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
+                <ToggleButton fx:id="post" mnemonicParsing="false" onAction="#postCategory" prefHeight="62.0" prefWidth="120.0" styleClass="button" text="Wielki post" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <FlowPane.margin>
+                        <Insets top="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
+                <ToggleButton fx:id="saint" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saintCategory" prefHeight="67.0" prefWidth="120.0" styleClass="button" text="Wszystkich świętych" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <FlowPane.margin>
+                        <Insets top="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
+                <ToggleButton fx:id="traditional" mnemonicParsing="false" onAction="#traditionalCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Tradycyjne" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <FlowPane.margin>
+                        <Insets top="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
+                <ToggleButton fx:id="adwent" mnemonicParsing="false" onAction="#adwentCategory" prefHeight="48.0" prefWidth="120.0" styleClass="button" text="Adwent" toggleGroup="$category">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <FlowPane.margin>
+                        <Insets top="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
+            </children>
+            <padding>
+                <Insets left="15.0" right="5.0" top="5.0" />
+            </padding>
+        </FlowPane>
+        <TableView fx:id="queueTableView" layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
+            <placeholder>
+                <Label text="" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="queueCategoryColumn" prefWidth="127.0" text="Kategoria" />
+                <TableColumn fx:id="queueNameColumn" prefWidth="239.0" text="Nazwa pieśni" />
+            </columns>
+        </TableView>
+        <TextField fx:id="searchBar" layoutX="43.0" layoutY="29.0" onKeyReleased="#searchSong" prefHeight="44.0" prefWidth="467.0" promptText="Wpisz nazwę pieśni" />
+        <ToggleButton fx:id="lightdark" layoutX="529.0" layoutY="35.0" mnemonicParsing="false" onAction="#changeBackground" text="Tryb jasny / ciemny" /> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
+        <ImageView fitHeight="400.0" fitWidth="607.0" layoutX="680.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="file:/C:/Users/Lenovo/Pictures/Saved%20Pictures/2560x1600.jpg" /> <!--- Tutaj jest wczytywany podgląd -->
+            </image>
+        </ImageView>
+        <TableView fx:id="songsTableView" layoutX="43.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
+            <placeholder>
+                <Label text="" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="searchCategoryColumn" prefWidth="75.0" text="Kategoria" />
+                <TableColumn fx:id="searchTitleColumn" prefWidth="390.0" text="Nazwa pieśni" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <Label layoutX="671.0" layoutY="24.0" prefHeight="28.0" prefWidth="87.0" text="Podgląd">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </Label>
+        <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="128.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
+            <children>
+                <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+            <padding>
+                <Insets left="10.0" top="10.0" />
+            </padding>
+        </FlowPane>
+        <Button layoutX="921.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wyczyść kolejkę">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="64.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong" text="Start" />
+        <Button layoutX="121.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
+        <Button layoutX="207.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide" text="Następny" />
+        <Button layoutX="292.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide" text="Poprzedni" />
+    </children>
 
 </AnchorPane>

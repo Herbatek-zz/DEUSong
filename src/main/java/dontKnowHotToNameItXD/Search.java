@@ -21,7 +21,7 @@ public class Search {
 
     private List<Song> songs = new ArrayList<>();
 
-    public List<Song> newSearch(String text) {
+    public List<Song> findByTitle(String text) {
         songs.clear();
 
         for (Filter filter : filters) {
@@ -38,8 +38,8 @@ public class Search {
         File[] files = dir.listFiles((dir1, name) -> StringUtils.containsIgnoreCase(name, text) && name.endsWith(".pptx"));
 
         if (files != null)
-            for (File a : files)
-                songs.add(FileToSongConverter.toSong(a, category));
+            for (File file : files)
+                songs.add(FileToSongConverter.toSong(file, category));
 
     }
 
@@ -59,10 +59,9 @@ public class Search {
         return true;
     }
 
-    public Filter[] setAllFiltersFalse(Filter[] filters) {
+    public void setAllFiltersFalse(Filter[] filters) {
         for (Filter filter : filters)
             filter.setState(false);
-        return filters;
     }
 
     public Filter[] setAllFiltersTrue(Filter[] filters) {

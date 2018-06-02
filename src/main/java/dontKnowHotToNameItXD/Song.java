@@ -2,6 +2,8 @@ package dontKnowHotToNameItXD;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class Song {
 
     private SimpleStringProperty title;
@@ -12,6 +14,21 @@ public class Song {
         this.title = new SimpleStringProperty(title);
         this.category = new SimpleStringProperty(category);
         this.path = new SimpleStringProperty(path);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return Objects.equals(title, song.title) &&
+                Objects.equals(path, song.path);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(title, path);
     }
 
     public String getTitle() {

@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Project implements KeyListener {
@@ -23,7 +22,13 @@ public class Project implements KeyListener {
         frame.setBackground(Color.black);
 
         loadBG();
-        showOnScreen(1, frame);
+
+        try {
+            showOnScreen(1, frame);
+        }
+        catch (RuntimeException e) {
+            e.printStackTrace();
+        }
         frame.setVisible(true);
 
     }

@@ -1,20 +1,21 @@
 package dontKnowHotToNameItXD;
 
+import javafx.scene.control.Alert;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 
 import java.awt.*;
-import java.util.List;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class SlideShow {
-    private BufferedImage img;
+    private BufferedImage image;
     private int slideNumber;
     private XMLSlideShow sShow;
-    private List<XSLFSlide> slide;
+    private List<XSLFSlide> slides;
     private Dimension size;
 
     private BufferedImage Slide2Img(int id) {
@@ -27,7 +28,7 @@ public class SlideShow {
 
         //  graphics.
         //render
-        slide.get(id).draw(graphics);
+        slides.get(id).draw(graphics);
 
 
         graphics.dispose();
@@ -35,18 +36,19 @@ public class SlideShow {
     }
 
 
-    public boolean open(String filename) {
-        boolean success = true;
+    public void open(String filePath) {
         try {
-            this.sShow = new XMLSlideShow(new FileInputStream(filename));
+            this.sShow = new XMLSlideShow(new FileInputStream(filePath));
         } catch (IOException e) {
-            e.printStackTrace();
-            success = false;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Niestety wystąpił błąd...");
+            alert.showAndWait();
         }
         size = sShow.getPageSize();
-        slide = sShow.getSlides();
-        slideNumber=0;
-        return success;
+        slides = sShow.getSlides();
+        slideNumber = 0;
     }
 
     public void end() {
@@ -58,24 +60,23 @@ public class SlideShow {
     }
 
     public void CurrentSlide(Project disp) {
-
-        img = Slide2Img(slideNumber);
-        disp.loadImage(img);
+        image = Slide2Img(slideNumber);
+        disp.loadImage(image);
     }
 
     public void nextSlide(Project disp) {
-        if (slide.size() > slideNumber) {
+        if (slides.size() > slideNumber) {
             slideNumber++;
-            img = Slide2Img(slideNumber);
-            disp.loadImage(img);
+            image = Slide2Img(slideNumber);
+            disp.loadImage(image);
         }
     }
 
     public void prevSlide(Project disp) {
         if (0 < slideNumber) {
             slideNumber--;
-            img = Slide2Img(slideNumber);
-            disp.loadImage(img);
+            image = Slide2Img(slideNumber);
+            disp.loadImage(image);
         }
     }
 
