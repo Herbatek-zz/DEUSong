@@ -36,7 +36,7 @@ public class Project implements KeyListener {
             gs[screen].setFullScreenWindow(frame);
 
 
-        } else if (gs.length == 0) {
+        } else if (gs.length == 1) {
             gs[0].setFullScreenWindow(frame);
 
         } else {
