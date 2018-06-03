@@ -104,13 +104,23 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void nextSlide() {       //Zmien nazwę na nextSlide ---- > done!
-        project.loadImage(slideShow.nextSlide());
+    private void nextSlide() {
+        try {
+            project.loadImage(slideShow.nextSlide());
+        }
+        catch (RuntimeException e) {
+            // nothing happend
+        }
     }
 
     @FXML
-    private void previousSlide() {   //Zmien nazwe na previousSlide ----- > done!
-        project.loadImage(slideShow.prevSlide());
+    private void previousSlide() {
+        try {
+            project.loadImage(slideShow.prevSlide());
+        }
+        catch (RuntimeException e) {
+            // nothing happend
+        }
     }
 
     @FXML
