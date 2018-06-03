@@ -1,103 +1,54 @@
 package dontKnowHotToNameItXD;
 
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import static javafx.stage.Screen.getPrimary;
+
 public class Project implements KeyListener {
 
-    private JFrame frame;
-    private Dimension screenSize = new Dimension();
+    private Stage stage;
+    private StackPane stackPane;
+    private Scene scene;
+    ImageView imageView;
+    Image image;
 
     public Project(SlideShow slideShow) {
-        GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-        this.screenSize.width = gd[0].getDisplayMode().getWidth();
-        this.screenSize.height = gd[0].getDisplayMode().getHeight();
-        frame = new JFrame();
-        frame.setBackground(Color.black);
+        stage = new Stage();
 
-        loadBG();
 
-        try {
-            showOnScreen(1, frame);
-        }
-        catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-        frame.setVisible(true);
+        image = new Image("/obrazy/default.jpg");
+        imageView = new ImageView(image);
+        imageView.setFitHeight(getPrimary().getBounds().getHeight());
+        imageView.setFitWidth(getPrimary().getBounds().getWidth());
+        stackPane = new StackPane(imageView);
 
+        scene = new Scene(stackPane);
+
+        stage.setFullScreen(true);
+
+        stage.setScene(scene);
     }
-
-    public static void showOnScreen(int screen, JFrame frame) {
-        GraphicsEnvironment ge = GraphicsEnvironment
-                .getLocalGraphicsEnvironment();
-        GraphicsDevice[] gs = ge.getScreenDevices();
-        if (screen > -1 && screen < gs.length) {
-            gs[screen].setFullScreenWindow(frame);
-
-
-        } else if (gs.length == 0) {
-            gs[0].setFullScreenWindow(frame);
-
-        } else {
-            throw new RuntimeException("No Screens Found");
-        }
-
-
-    }
-
-
-    public BufferedImage resizeImage(BufferedImage img) {
-        System.out.println(screenSize.height + "+" + screenSize.width);
-
-        BufferedImage newImage = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_INT_RGB);
-        Graphics g = newImage.createGraphics();
-        g.drawImage(img, 0, 0, screenSize.height * 5 / 4, screenSize.height, null);
-        g.dispose();
-        return newImage;
-    }
-
 
     public void loadImage(BufferedImage img) {
-
-        frame.getContentPane().removeAll();
-        //frame.repaint();
-        frame.getContentPane().add(new JLabel(new ImageIcon(resizeImage(img))));
-
-        frame.pack();
-       // frame.setLocationRelativeTo(null);
-       // frame.setVisible(true);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-
-
+        image = SwingFXUtils.toFXImage(img, null);
     }
 
-    public void loadBG() {
-
-        BufferedImage img;
-        try {
-            img = ImageIO.read(getClass().getResource("/obrazy/default.jpg"));
-            loadImage(img);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        frame.setState(Frame.MAXIMIZED_BOTH);
+    public void show() {
+        stage.show();
     }
 
-public void fix()
-{
-    this.frame.setState(Frame.MAXIMIZED_BOTH);
-}
-
-
-    private void slideControl(){
-
-    }
 
 
 

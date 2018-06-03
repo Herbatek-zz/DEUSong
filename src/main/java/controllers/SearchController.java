@@ -91,16 +91,13 @@ public class SearchController implements Initializable {
 
     @FXML
     private void playSong() {
-        slideShow.CurrentSlide(project);
-        System.out.println("start song");
-        isProjecting = true;
+        project.show();
     }
 
     @FXML
     private void stopSong() {
         System.out.println("stop song");
         //  slideShow.end();
-        project.loadBG();
         isProjecting = false;
     }
 
@@ -224,9 +221,8 @@ public class SearchController implements Initializable {
 
         for (Song queueSong : queueTableView.getItems()) {
             for (Song searchSong : songs) {
-                if (queueSong.getTitle().equals(searchSong.getTitle())) {
+                if (queueSong.getTitle().equals(searchSong.getTitle()))
                     songs.remove(searchSong);
-                }
             }
         }
         return songs;
