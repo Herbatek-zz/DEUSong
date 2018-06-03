@@ -8,11 +8,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import static javafx.stage.Screen.getPrimary;
 
@@ -43,13 +41,16 @@ public class Project implements KeyListener {
 
     public void loadImage(BufferedImage img) {
         image = SwingFXUtils.toFXImage(img, null);
+        imageView.setImage(image);
     }
 
     public void show() {
         stage.show();
     }
 
-
+    public void close() {
+        stage.close();
+    }
 
 
     @Override
@@ -73,7 +74,6 @@ public class Project implements KeyListener {
 //            case KeyEvent.VK_NUMPAD9: {
 //                //next in queue
 //            }
-
 
 
     }

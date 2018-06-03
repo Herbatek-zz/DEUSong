@@ -14,11 +14,6 @@ public class Main extends Application {
         primaryStage.setTitle("Deus Songs");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        //ECIU EDIT
-
-
-
-//
     }
 
 

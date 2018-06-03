@@ -54,10 +54,9 @@ public class SearchController implements Initializable {
     @FXML
     private void searchSong() {
         searchList.clear();
-
-        List<Song> foundedSongs = reduceDuplicates(search.findByTitle(searchBar.getText()));
-
-        searchList.addAll(foundedSongs);
+        List<Song> foundSongs = search.findByTitle(searchBar.getText());
+        foundSongs = reduceDuplicates(foundSongs);
+        searchList.addAll(foundSongs);
         songsTableView.getItems().setAll(searchList);
     }
 
@@ -78,7 +77,7 @@ public class SearchController implements Initializable {
         } else {
             this.queueList.add(song);
             this.queueTableView.getItems().setAll(queueList);
-            this.songsTableView.getItems().setAll(reduceDuplicates(songsTableView.getItems()));
+            this.songsTableView.getItems().remove(song);
 
         }
 
@@ -86,18 +85,21 @@ public class SearchController implements Initializable {
 
     @FXML
     private void clearQueue() {
+        queueList.clear();
         queueTableView.getItems().clear();
     }
 
     @FXML
     private void playSong() {
+        Song song = queueTableView.getSelectionModel().getSelectedItem();
+        slideShow.open(song);
+        project.loadImage(slideShow.currentSlide());
         project.show();
     }
 
     @FXML
     private void stopSong() {
-        System.out.println("stop song");
-        //  slideShow.end();
+        project.close();
         isProjecting = false;
     }
 
@@ -143,57 +145,60 @@ public class SearchController implements Initializable {
 
     @FXML
     private void traditionalCategory() {
-        songsTableView.getItems().clear();
-        Filter[] filters = search.getFilters();
-        search.setAllFiltersFalse(filters);
-        filters[0].setState(true);
-        songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        setFilters(0);
     }
 
     @FXML
     private void postCategory() {
-        songsTableView.getItems().clear();
-        Filter[] filters = search.getFilters();
-        search.setAllFiltersFalse(filters);
-        filters[1].setState(true);
-        songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        setFilters(1);
     }
 
     @FXML
     private void easterCategory() {
-        songsTableView.getItems().clear();
-        Filter[] filters = search.getFilters();
-        search.setAllFiltersFalse(filters);
-        filters[2].setState(true);
-        songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        setFilters(2);
     }
 
     @FXML
     private void adwentCategory() {
-        songsTableView.getItems().clear();
-        Filter[] filters = search.getFilters();
-        search.setAllFiltersFalse(filters);
-        filters[3].setState(true);
-        songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        setFilters(3);
     }
 
     @FXML
     private void christmasCategory() {
-        songsTableView.getItems().clear();
-        Filter[] filters = search.getFilters();
-        search.setAllFiltersFalse(filters);
-        filters[4].setState(true);
-        songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        setFilters(4);
     }
 
+    @FXML
+    private void allCategories() {
+        setFilters(5);
+    }
 
     @FXML
     private void saintCategory() {
+        setFilters(6);
+    }
+
+    private void setFilters(int filterId) {
         songsTableView.getItems().clear();
         Filter[] filters = search.getFilters();
-        search.setAllFiltersFalse(filters);
-        filters[6].setState(true);
-        songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        if(filterId != 5) {
+            search.setAllFiltersFalse(filters);
+            filters[filterId].setState(true);
+        }
+        else
+            search.setAllFiltersTrue(filters);
+        try {
+            if (searchBar.getText() != null)
+                songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle(searchBar.getText())));
+            else
+                songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Nie znaleziono pieśni w kategorii: " + filters[filterId].getCategory());
+            alert.showAndWait();
+        }
     }
 
 
@@ -218,13 +223,19 @@ public class SearchController implements Initializable {
     }
 
     private List<Song> reduceDuplicates(List<Song> songs) {
+        if (songs.size() > 0 && queueTableView.getItems().size() > 0) {
+            for (Song queueSong : queueTableView.getItems())
+                for (Song searchSong : songs) {
+                    if (queueSong.getTitle().equals(searchSong.getTitle()))
+                        songs.remove(searchSong);
 
-        for (Song queueSong : queueTableView.getItems()) {
-            for (Song searchSong : songs) {
-                if (queueSong.getTitle().equals(searchSong.getTitle()))
-                    songs.remove(searchSong);
-            }
-        }
-        return songs;
+                }
+            if (songs.size() > 0)
+                return songs;
+            else
+                throw new RuntimeException();
+
+        } else
+            return songs;
     }
 }

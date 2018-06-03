@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class SlideShow {
-    private BufferedImage image;
+
     private int slideNumber;
     private XMLSlideShow sShow;
     private List<XSLFSlide> slides;
@@ -36,9 +36,9 @@ public class SlideShow {
     }
 
 
-    public void open(String filePath) {
+    public void open(Song song) {
         try {
-            this.sShow = new XMLSlideShow(new FileInputStream(filePath));
+            this.sShow = new XMLSlideShow(new FileInputStream(song.getFile()));
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Błąd");
@@ -59,25 +59,24 @@ public class SlideShow {
         }
     }
 
-    public void CurrentSlide(Project disp) {
-        image = Slide2Img(slideNumber);
-        disp.loadImage(image);
+    public BufferedImage currentSlide() {
+        return Slide2Img(slideNumber);
     }
 
-    public void nextSlide(Project disp) {
+    public BufferedImage nextSlide() {
         if (slides.size() > slideNumber) {
             slideNumber++;
-            image = Slide2Img(slideNumber);
-            disp.loadImage(image);
+            return Slide2Img(slideNumber);
         }
+        throw new RuntimeException("Nie ma następnego slajdu");
     }
 
-    public void prevSlide(Project disp) {
+    public BufferedImage prevSlide() {
         if (0 < slideNumber) {
             slideNumber--;
-            image = Slide2Img(slideNumber);
-            disp.loadImage(image);
+            return Slide2Img(slideNumber);
         }
+        throw new RuntimeException("Nie ma wcześniejszego slajdu");
     }
 
 

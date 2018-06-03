@@ -2,6 +2,7 @@ package dontKnowHotToNameItXD;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.File;
 import java.util.Objects;
 
 public class Song {
@@ -9,26 +10,13 @@ public class Song {
     private SimpleStringProperty title;
     private SimpleStringProperty category;
     private SimpleStringProperty path;
+    private File file;
 
-    public Song(String title, String category, String path) {
+    public Song(String title, String category, String path, File file) {
         this.title = new SimpleStringProperty(title);
         this.category = new SimpleStringProperty(category);
         this.path = new SimpleStringProperty(path);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Song song = (Song) o;
-        return Objects.equals(title, song.title) &&
-                Objects.equals(path, song.path);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(title, path);
+        this.file = file;
     }
 
     public String getTitle() {
@@ -57,5 +45,13 @@ public class Song {
 
     public String getPath() {
         return path.get();
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }
