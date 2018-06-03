@@ -1,3 +1,4 @@
+import controllers.SearchController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,10 +11,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Deus Songs");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        SearchController controller = loader.getController();
+        controller.fakeInit();
         //ECIU EDIT
 
 

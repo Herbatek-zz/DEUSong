@@ -23,9 +23,16 @@ import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
 
-    SlideShow slideShow = new SlideShow();
-    Project project= new Project(slideShow);
+    SlideShow slideShow ;//= new SlideShow();
+    Project project;//new Project(slideShow);
     boolean isProjecting = false;
+
+    public void fakeInit()
+    {
+        slideShow=new SlideShow();
+        project = new Project(slideShow);
+    }
+
 
     @FXML // Tabela wyszukanych piesni
     private TableView<Song> songsTableView;
