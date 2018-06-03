@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyListener" prefHeight="720.0" prefWidth="1280.0" styleClass="bg" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
+<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyListener" onMouseClicked="#unfocus" prefHeight="720.0" prefWidth="1280.0" styleClass="bg" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
     <children>
       <FlowPane hgap="20.0" layoutX="514.0" layoutY="74.0" maxHeight="346.0" maxWidth="265.0" prefHeight="325.0" prefWidth="126.0" vgap="20.0">
          <children>
@@ -99,13 +99,9 @@
          <font>
             <Font size="21.0" />
          </font></Label>
-      <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="312.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
+      <FlowPane hgap="30.0" layoutX="51.0" layoutY="455.0" prefHeight="72.0" prefWidth="128.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
          <children>
-            <Button mnemonicParsing="false" onAction="#addToPreview" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" onAction="#addToQueue" onKeyPressed="#keyListener" prefHeight="48.0" prefWidth="162.0" text="Dodaj do kolejki">
+            <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
                <font>
                   <Font size="18.0" />
                </font></Button>
@@ -121,8 +117,8 @@
       </Button>
       <Button layoutX="64.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong" text="Start" />
       <Button layoutX="121.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
-      <Button layoutX="207.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSong" text="Następny" />
-      <Button layoutX="292.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSong" text="Poprzedni" />
+      <Button layoutX="207.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide" text="Następny" />
+      <Button layoutX="292.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide" text="Poprzedni" />
    </children>
 
 </AnchorPane>

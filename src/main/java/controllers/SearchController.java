@@ -97,12 +97,12 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void addToQueue() {  //wypierdol to razem z guzikem
-
+    private void unfocus() {
+        bg.requestFocus();
     }
 
     @FXML
-    private void addToPreview() {
+    private void addToQueue() {
         Song song = songsTableView.getSelectionModel().getSelectedItem();
         System.out.println(song.getTitle());
         slideShow.open(song.getPath());
@@ -132,12 +132,12 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void nextSong() {       //Zmien nazwę na nextSlide
+    private void nextSlide() {       //Zmien nazwę na nextSlide ---- > done!
         slideShow.nextSlide(project);
     }
 
     @FXML
-    private void previousSong() {   //Zmien nazwe na previousSlide
+    private void previousSlide() {   //Zmien nazwe na previousSlide ----- > done!
         slideShow.prevSlide(project);
     }
 
@@ -146,12 +146,12 @@ public class SearchController implements Initializable {
         switch (event.getCode()) {
             case NUMPAD1:
             case DIGIT1: { // Poprzedni
-              previousSong();
+              previousSlide();
             }
             break;
             case NUMPAD3:
             case DIGIT3: { // Następny
-            nextSong();
+            nextSlide();
             }
             break;
             case NUMPAD7:
