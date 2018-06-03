@@ -105,12 +105,12 @@ public class SearchController implements Initializable {
 
     @FXML
     private void nextSlide() {       //Zmien nazwę na nextSlide ---- > done!
-        slideShow.nextSlide(project);
+        slideShow.nextSlide();
     }
 
     @FXML
     private void previousSlide() {   //Zmien nazwe na previousSlide ----- > done!
-        slideShow.prevSlide(project);
+        slideShow.prevSlide();
     }
 
     @FXML
