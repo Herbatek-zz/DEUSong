@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -79,9 +80,7 @@ public class SearchController implements Initializable {
             this.queueList.add(song);
             this.queueTableView.getItems().setAll(queueList);
             this.songsTableView.getItems().remove(song);
-
         }
-
     }
 
     @FXML
@@ -93,6 +92,7 @@ public class SearchController implements Initializable {
 
     @FXML
     private void playSong() {
+        isProjecting = true;
         Song song;
         if (queueList.size() > 0) {
             song = queueTableView.getSelectionModel().getSelectedItem();
@@ -102,23 +102,23 @@ public class SearchController implements Initializable {
                 project.show();
             } else {
                 song = queueList.get(currentPresentation);
-                slideShow.open(song);
-                project.loadImage(slideShow.currentSlide());
-                project.show();
+                if (slideShow.open(song)) {
+                    project.loadImage(slideShow.currentSlide());
+                    project.show();
+                }
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Błąd");
-            alert.setHeaderText(null);
-            alert.setContentText("Kolejka jest pusta");
-            alert.showAndWait();
+            isProjecting = false;
+            AlertFactory
+                    .createError("Kolejka jest pusta")
+                    .showAndWait();
         }
     }
 
     @FXML
     private void stopSong() {
-        project.close();
         isProjecting = false;
+        project.close();
         currentPresentation = 0;
     }
 
@@ -127,10 +127,14 @@ public class SearchController implements Initializable {
         try {
             project.loadImage(slideShow.nextSlide());
         } catch (RuntimeException e) {
-            currentPresentation++;
-            if (queueList.size() > currentPresentation) {
-                playSong();
-            }
+            nextPresentation();
+        }
+    }
+
+    private void nextPresentation() {
+        currentPresentation++;
+        if (queueList.size() > currentPresentation) {
+            playSong();
         }
     }
 
@@ -138,8 +142,8 @@ public class SearchController implements Initializable {
     private void previousSlide() {
         try {
             project.loadImage(slideShow.prevSlide());
-        } catch (RuntimeException e) {
-            // nothing happend
+        } catch (RuntimeException ignored) {
+
         }
     }
 
@@ -147,60 +151,61 @@ public class SearchController implements Initializable {
     private void keyListener(KeyEvent event) {
         switch (event.getCode()) {
             case NUMPAD1:
-            case DIGIT1: { // Poprzedni
+            case DIGIT1:
                 previousSlide();
-            }
-            break;
+                break;
             case NUMPAD3:
-            case DIGIT3: { // Następny
+            case DIGIT3:
                 nextSlide();
-            }
-            break;
+                break;
             case NUMPAD7:
-            case DIGIT7: { // Start/Stop
-                if (isProjecting) {
+            case DIGIT7:
+                if (isProjecting)
                     stopSong();
-                } else {
+                else
                     playSong();
-                }
-            }
-            break;
+                break;
             case NUMPAD9:
-            case DIGIT9: { // Następna piesn
-                System.out.println("numpad9");
-            }
-            break;
+            case DIGIT9:
+                nextPresentation();
+                break;
         }
     }
 
     @FXML
     private void traditionalCategory() {
         setFilters(0);
+        searchSong();
     }
 
     @FXML
     private void postCategory() {
         setFilters(1);
+        searchSong();
     }
 
     @FXML
     private void easterCategory() {
         setFilters(2);
+        searchSong();
     }
 
     @FXML
     private void adwentCategory() {
         setFilters(3);
+        searchSong();
     }
 
     @FXML
     private void christmasCategory() {
         setFilters(4);
+        searchSong();
     }
 
     @FXML
     private void allCategories() {
         setFilters(5);
+        searchSong();
     }
 
     @FXML
@@ -209,30 +214,13 @@ public class SearchController implements Initializable {
     }
 
     private void setFilters(int filterId) {
-        songsTableView.getItems().clear();
         Filter[] filters = search.getFilters();
         if (filterId != 5) {
             search.setAllFiltersFalse(filters);
             filters[filterId].setState(true);
         } else
             search.setAllFiltersTrue(filters);
-        try {
-            if (searchBar.getText().length() > 0)
-                songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle(searchBar.getText())));
-            else
-                songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
-        } catch (RuntimeException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Błąd");
-            alert.setHeaderText(null);
-            if (filterId == 5)
-                alert.setContentText("Nie znaleziono pieśni");
-            else
-                alert.setContentText("Nie znaleziono pieśni w kategorii: " + filters[filterId].getCategory());
-            alert.showAndWait();
-        }
     }
-
 
     @FXML
     private void changeBackground() {
@@ -257,12 +245,13 @@ public class SearchController implements Initializable {
     }
 
     private List<Song> reduceDuplicates(List<Song> songs) {
+        List<Song> toRemoveList = new ArrayList<>();
         if (songs.size() > 0 && queueTableView.getItems().size() > 0)
             for (Song queueSong : queueTableView.getItems())
                 for (Song searchSong : songs)
                     if (queueSong.getTitle().equals(searchSong.getTitle()))
-                        songs.remove(searchSong);
-
-            return songs;
+                        toRemoveList.add(searchSong);
+        songs.removeAll(toRemoveList);
+        return songs;
     }
 }

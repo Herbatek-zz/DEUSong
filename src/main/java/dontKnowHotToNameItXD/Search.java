@@ -63,9 +63,8 @@ public class Search {
             filter.setState(false);
     }
 
-    public Filter[] setAllFiltersTrue(Filter[] filters) {
+    public void setAllFiltersTrue(Filter[] filters) {
         for (Filter filter : filters)
             filter.setState(true);
-        return filters;
     }
 }

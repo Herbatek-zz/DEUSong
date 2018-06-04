@@ -7,15 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-
-import static javafx.stage.Screen.getPrimary;
 
 public class Project implements KeyListener {
 
@@ -28,23 +25,23 @@ public class Project implements KeyListener {
 
     public Project() {
         screens = Screen.getScreens();
-        stage = new Stage();
 
+        stage = new Stage();
+        stage.setFullScreen(true);
 
         image = new Image("/obrazy/default.jpg");
+
         imageView = new ImageView(image);
-        imageView.setFitHeight(getPrimary().getBounds().getHeight());
-        imageView.setFitWidth(getPrimary().getBounds().getWidth());
+//        odkomentować to poniżej jeśli wielkość > jakość
+//        imageView.setFitHeight(Screen.getPrimary().getBounds().getHeight());
+//        imageView.setFitWidth(Screen.getPrimary().getBounds().getWidth());
         imageView.setSmooth(true);
         imageView.setPreserveRatio(true);
         imageView.setCache(true);
+
         stackPane = new StackPane(imageView);
-
         stackPane.setStyle("-fx-background-color: #000000;");
-
         scene = new Scene(stackPane);
-
-        stage.setFullScreen(true);
 
         stage.setScene(scene);
     }
@@ -84,7 +81,6 @@ public class Project implements KeyListener {
 //            case KeyEvent.VK_NUMPAD9: {
 //                //next in queue
 //            }
-
 
     }
 
