@@ -44,12 +44,13 @@ public class SearchController implements Initializable {
     private AnchorPane bg;
 
     private SlideShow slideShow = new SlideShow();
-    private Project project = new Project(slideShow);
+    private Project project = new Project();
     private boolean isProjecting = false;
 
     private ObservableList<Song> searchList = FXCollections.observableArrayList();
     private ObservableList<Song> queueList = FXCollections.observableArrayList();
     private Search search = new Search();
+    private int currentPresentation = 0;
 
     @FXML
     private void searchSong() {
@@ -87,29 +88,49 @@ public class SearchController implements Initializable {
     private void clearQueue() {
         queueList.clear();
         queueTableView.getItems().clear();
+        currentPresentation = 0;
     }
 
     @FXML
     private void playSong() {
-        Song song = queueTableView.getSelectionModel().getSelectedItem();
-        slideShow.open(song);
-        project.loadImage(slideShow.currentSlide());
-        project.show();
+        Song song;
+        if (queueList.size() > 0) {
+            song = queueTableView.getSelectionModel().getSelectedItem();
+            if (song != null) {
+                slideShow.open(song);
+                project.loadImage(slideShow.currentSlide());
+                project.show();
+            } else {
+                song = queueList.get(currentPresentation);
+                slideShow.open(song);
+                project.loadImage(slideShow.currentSlide());
+                project.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Kolejka jest pusta");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void stopSong() {
         project.close();
         isProjecting = false;
+        currentPresentation = 0;
     }
 
     @FXML
     private void nextSlide() {
         try {
             project.loadImage(slideShow.nextSlide());
-        }
-        catch (RuntimeException e) {
-            // nothing happend
+        } catch (RuntimeException e) {
+            currentPresentation++;
+            if (queueList.size() > currentPresentation) {
+                playSong();
+            }
         }
     }
 
@@ -117,8 +138,7 @@ public class SearchController implements Initializable {
     private void previousSlide() {
         try {
             project.loadImage(slideShow.prevSlide());
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             // nothing happend
         }
     }
@@ -191,14 +211,13 @@ public class SearchController implements Initializable {
     private void setFilters(int filterId) {
         songsTableView.getItems().clear();
         Filter[] filters = search.getFilters();
-        if(filterId != 5) {
+        if (filterId != 5) {
             search.setAllFiltersFalse(filters);
             filters[filterId].setState(true);
-        }
-        else
+        } else
             search.setAllFiltersTrue(filters);
         try {
-            if (searchBar.getText() != null)
+            if (searchBar.getText().length() > 0)
                 songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle(searchBar.getText())));
             else
                 songsTableView.getItems().setAll(reduceDuplicates(search.findByTitle("")));
@@ -206,7 +225,10 @@ public class SearchController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Błąd");
             alert.setHeaderText(null);
-            alert.setContentText("Nie znaleziono pieśni w kategorii: " + filters[filterId].getCategory());
+            if (filterId == 5)
+                alert.setContentText("Nie znaleziono pieśni");
+            else
+                alert.setContentText("Nie znaleziono pieśni w kategorii: " + filters[filterId].getCategory());
             alert.showAndWait();
         }
     }
@@ -230,22 +252,17 @@ public class SearchController implements Initializable {
 
         songsTableView.getItems().setAll(search.findByTitle(""));
 
+        project.show();
+
     }
 
     private List<Song> reduceDuplicates(List<Song> songs) {
-        if (songs.size() > 0 && queueTableView.getItems().size() > 0) {
+        if (songs.size() > 0 && queueTableView.getItems().size() > 0)
             for (Song queueSong : queueTableView.getItems())
-                for (Song searchSong : songs) {
+                for (Song searchSong : songs)
                     if (queueSong.getTitle().equals(searchSong.getTitle()))
                         songs.remove(searchSong);
 
-                }
-            if (songs.size() > 0)
-                return songs;
-            else
-                throw new RuntimeException();
-
-        } else
             return songs;
     }
 }

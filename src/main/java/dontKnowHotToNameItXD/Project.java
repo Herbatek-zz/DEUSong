@@ -1,11 +1,14 @@
 package dontKnowHotToNameItXD;
 
 
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.awt.event.KeyEvent;
@@ -21,8 +24,10 @@ public class Project implements KeyListener {
     private Scene scene;
     ImageView imageView;
     Image image;
+    ObservableList<Screen> screens;
 
-    public Project(SlideShow slideShow) {
+    public Project() {
+        screens = Screen.getScreens();
         stage = new Stage();
 
 
@@ -30,7 +35,12 @@ public class Project implements KeyListener {
         imageView = new ImageView(image);
         imageView.setFitHeight(getPrimary().getBounds().getHeight());
         imageView.setFitWidth(getPrimary().getBounds().getWidth());
+        imageView.setSmooth(true);
+        imageView.setPreserveRatio(true);
+        imageView.setCache(true);
         stackPane = new StackPane(imageView);
+
+        stackPane.setStyle("-fx-background-color: #000000;");
 
         scene = new Scene(stackPane);
 
