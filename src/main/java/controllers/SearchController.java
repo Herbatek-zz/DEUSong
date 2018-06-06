@@ -43,17 +43,14 @@ public class SearchController implements Initializable {
     @FXML
     private TableColumn<Song, String> songNameColumn;
 
-//    @FXML // Tabela kolejki piesni
-//    private TableView<Song> queueTableView;
-//
-//    @FXML
-//    private TableColumn<Song, String> queueId;
-//
-//    @FXML
-//    private TableColumn<Song, String> queueCategory;
-//
-//    @FXML
-//    private TableColumn<Song, String> queueName;
+    @FXML // Tabela kolejki piesni
+    private TableView<Song> queueTableView;
+
+    @FXML
+    private TableColumn<Song, String> queueCategory;
+
+    @FXML
+    private TableColumn<Song, String> queueName;
 
 
     @FXML
@@ -84,14 +81,13 @@ public class SearchController implements Initializable {
     private AnchorPane bg;
 
     private ObservableList<Song> list = FXCollections.observableArrayList();
+    private ObservableList<Song> queueList = FXCollections.observableArrayList();
 
     private Search search = new Search();
 
     @FXML
     private void search(KeyEvent event) {
         list.clear();
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        songNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         list.addAll(search.newSearch(searchBar.getText()));
         songsTableView.getItems().setAll(list);
     }
@@ -103,9 +99,20 @@ public class SearchController implements Initializable {
 
     @FXML
     private void addToQueue() {
+
+
         Song song = songsTableView.getSelectionModel().getSelectedItem();
-        System.out.println(song.getTitle());
-        slideShow.open(song.getPath());
+        if (song == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Nie wybrałeś żadnej pieśni");
+            alert.showAndWait();
+        } else {
+            this.queueList.add(song);
+            this.queueTableView.getItems().setAll(queueList);
+            this.songsTableView.getItems().remove(song);
+        }
 
     }
 
@@ -266,7 +273,13 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        queueCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        queueName.setCellValueFactory(new PropertyValueFactory<>("title"));
 
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        songNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        songsTableView.getItems().setAll(search.newSearch(""));
 
     }
 }
