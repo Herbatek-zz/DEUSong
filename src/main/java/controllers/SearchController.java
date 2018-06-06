@@ -118,7 +118,7 @@ public class SearchController implements Initializable {
     @FXML
     private void stopSong() {
         isProjecting = false;
-        project.close();
+        project.loadBG();
         currentPresentation = 0;
     }
 

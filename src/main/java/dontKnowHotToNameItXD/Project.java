@@ -33,8 +33,8 @@ public class Project implements KeyListener {
 
         imageView = new ImageView(image);
 //        odkomentować to poniżej jeśli wielkość > jakość
-//        imageView.setFitHeight(Screen.getPrimary().getBounds().getHeight());
-//        imageView.setFitWidth(Screen.getPrimary().getBounds().getWidth());
+        imageView.setFitHeight(Screen.getPrimary().getBounds().getHeight());
+        imageView.setFitWidth(Screen.getPrimary().getBounds().getWidth());
         imageView.setSmooth(true);
         imageView.setPreserveRatio(true);
         imageView.setCache(true);
@@ -59,6 +59,11 @@ public class Project implements KeyListener {
         stage.close();
     }
 
+    public void loadBG()
+    {
+        image= new Image("/obrazy/default.jpg");
+        imageView.setImage(image);
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
