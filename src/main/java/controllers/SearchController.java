@@ -51,7 +51,7 @@ public class SearchController implements Initializable {
     private ObservableList<Song> searchList = FXCollections.observableArrayList();
     private ObservableList<Song> queueList = FXCollections.observableArrayList();
     private Search search = new Search();
-    private int currentPresentation = 0;
+//    private int currentPresentation = 0;
 
     @FXML
     private void searchSong() {
@@ -87,7 +87,7 @@ public class SearchController implements Initializable {
     private void clearQueue() {
         queueList.clear();
         queueTableView.getItems().clear();
-        currentPresentation = 0;
+//        currentPresentation = 0;
     }
 
     @FXML
@@ -95,18 +95,25 @@ public class SearchController implements Initializable {
         isProjecting = true;
         Song song;
         if (queueList.size() > 0) {
-            song = queueTableView.getSelectionModel().getSelectedItem();
-            if (song != null) {
-                slideShow.open(song);
-                project.loadImage(slideShow.currentSlide());
-                project.show();
-            } else {
-                song = queueList.get(currentPresentation);
-                if (slideShow.open(song)) {
-                    project.loadImage(slideShow.currentSlide());
-                    project.show();
-                }
-            }
+
+            song=queueList.get(0);
+            slideShow.open(song);
+            queueList.remove(0);
+            project.loadImage(slideShow.currentSlide());
+            project.show();
+
+//            song = queueTableView.getSelectionModel().getSelectedItem();
+//            if (song != null) {
+//                slideShow.open(song);
+//                project.loadImage(slideShow.currentSlide());
+//                project.show();
+//            } else {
+//                song = queueList.get(currentPresentation);
+//                if (slideShow.open(song)) {
+//                    project.loadImage(slideShow.currentSlide());
+//                    project.show();
+//                }
+//            }
         } else {
             isProjecting = false;
             AlertFactory
@@ -119,7 +126,8 @@ public class SearchController implements Initializable {
     private void stopSong() {
         isProjecting = false;
         project.loadBG();
-        currentPresentation = 0;
+        queueList.remove(0);
+//        currentPresentation = 0;
     }
 
     @FXML
@@ -132,10 +140,24 @@ public class SearchController implements Initializable {
     }
 
     private void nextPresentation() {
-        currentPresentation++;
-        if (queueList.size() > currentPresentation) {
+        try {
+            this.queueTableView.getItems().setAll(queueList);
+           if(!queueList.isEmpty())
             playSong();
+           else
+           {
+               stopSong();
+           }
         }
+        catch (RuntimeException e)
+        {
+//w/e
+        }
+
+//        currentPresentation++;
+//        if (queueList.size() > currentPresentation) {
+//            playSong();
+//        }
     }
 
     @FXML
