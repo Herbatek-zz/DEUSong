@@ -28,8 +28,11 @@ public class Project implements KeyListener {
         ObservableList<Screen> screens = Screen.getScreens();
 
         Screen screen1 = screens.get(0);
-        Screen screen2 = screens.get(1);
-
+        Screen screen2;
+        if (screens.size() > 1)
+        screen2= screens.get(1);
+        else
+         screen2=screens.get(0);
         System.out.println("screen1 = " + screen1.getBounds());
         System.out.println("screen2 = " + screen2.getBounds());
 

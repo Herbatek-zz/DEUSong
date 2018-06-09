@@ -126,7 +126,7 @@ public class SearchController implements Initializable {
     private void stopSong() {
         isProjecting = false;
         project.loadBG();
-        queueList.remove(0);
+
 //        currentPresentation = 0;
     }
 
