@@ -99,6 +99,7 @@ public class SearchController implements Initializable {
             song=queueList.get(0);
             slideShow.open(song);
             queueList.remove(0);
+            queueTableView.getItems().setAll(queueList);
             project.loadImage(slideShow.currentSlide());
             project.show();
 
@@ -124,6 +125,7 @@ public class SearchController implements Initializable {
 
     @FXML
     private void stopSong() {
+        queueTableView.getItems().setAll(queueList);
         isProjecting = false;
         project.loadBG();
 
