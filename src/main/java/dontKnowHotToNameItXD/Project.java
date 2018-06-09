@@ -21,26 +21,24 @@ public class Project implements KeyListener {
     private Scene scene;
     ImageView imageView;
     Image image;
-    ObservableList<Screen> screens;
 
     public Project() {
 
         ObservableList<Screen> screens = Screen.getScreens();
 
-        Screen screen1 = screens.get(0);
-        Screen screen2;
-        if (screens.size() > 1)
-        screen2= screens.get(1);
+        Screen projector;
+        if (screens.size() > 1) {
+            projector = screens.get(1);
+        }
         else
-         screen2=screens.get(0);
-        System.out.println("screen1 = " + screen1.getBounds());
-        System.out.println("screen2 = " + screen2.getBounds());
+            projector = screens.get(0);
+
 
         stage = new Stage();
-        stage.setX(screen2.getVisualBounds().getMinX());
-        stage.setY(screen2.getVisualBounds().getMinY());
-        stage.setWidth(screen2.getBounds().getWidth());
-        stage.setHeight(screen2.getBounds().getHeight());
+        stage.setX(projector.getVisualBounds().getMinX());
+        stage.setY(projector.getVisualBounds().getMinY());
+        stage.setWidth(projector.getBounds().getWidth());
+        stage.setHeight(projector.getBounds().getHeight());
         stage.setFullScreen(true);
 
         image = new Image("/obrazy/default.jpg");
