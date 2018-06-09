@@ -24,9 +24,20 @@ public class Project implements KeyListener {
     ObservableList<Screen> screens;
 
     public Project() {
-        screens = Screen.getScreens();
+
+        ObservableList<Screen> screens = Screen.getScreens();
+
+        Screen screen1 = screens.get(0);
+        Screen screen2 = screens.get(1);
+
+        System.out.println("screen1 = " + screen1.getBounds());
+        System.out.println("screen2 = " + screen2.getBounds());
 
         stage = new Stage();
+        stage.setX(screen2.getVisualBounds().getMinX());
+        stage.setY(screen2.getVisualBounds().getMinY());
+        stage.setWidth(screen2.getBounds().getWidth());
+        stage.setHeight(screen2.getBounds().getHeight());
         stage.setFullScreen(true);
 
         image = new Image("/obrazy/default.jpg");
