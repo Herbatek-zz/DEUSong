@@ -121,6 +121,7 @@ public class SearchController implements Initializable {
         queueTableView.getItems().setAll(queueList);
         isProjecting = false;
         project.loadBG(DEFAULT_BACKGROUND);
+        setPreview(DEFAULT_BACKGROUND);
     }
 
     @FXML
