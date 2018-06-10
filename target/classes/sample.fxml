@@ -130,11 +130,8 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </ToggleButton> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
-        <ImageView fitHeight="400.0" fitWidth="607.0" layoutX="680.0" layoutY="67.0" pickOnBounds="true"
+        <ImageView fx:id="imagePreview" fitHeight="400.0" fitWidth="607.0" layoutX="680.0" layoutY="67.0" pickOnBounds="true"
                    preserveRatio="true">
-            <image>
-                <Image url="file:/C:/Users/Lenovo/Pictures/Saved%20Pictures/2560x1600.jpg"/> <!--- Tutaj jest wczytywany podgląd -->
-            </image>
         </ImageView>
         <TableView fx:id="songsTableView" layoutX="43.0" layoutY="89.0" prefHeight="359.0"
                    prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->

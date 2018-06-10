@@ -1,4 +1,6 @@
-package dontKnowHotToNameItXD;
+package converters;
+
+import dontKnowHotToNameItXD.Song;
 
 import java.io.File;
 

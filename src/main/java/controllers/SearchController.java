@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -42,6 +44,9 @@ public class SearchController implements Initializable {
     private ToggleButton lightdark;
 
     @FXML
+    private ImageView imagePreview;
+
+    @FXML
     private AnchorPane bg;
 
     private SlideShow slideShow = new SlideShow();
@@ -51,7 +56,8 @@ public class SearchController implements Initializable {
     private ObservableList<Song> searchList = FXCollections.observableArrayList();
     private ObservableList<Song> queueList = FXCollections.observableArrayList();
     private Search search = new Search();
-//    private int currentPresentation = 0;
+
+    private final Image DEFAULT_BACKGROUND = new Image("/obrazy/default.jpg");
 
     @FXML
     private void searchSong() {
@@ -87,34 +93,21 @@ public class SearchController implements Initializable {
     private void clearQueue() {
         queueList.clear();
         queueTableView.getItems().clear();
-//        currentPresentation = 0;
     }
 
     @FXML
     private void playSong() {
         isProjecting = true;
         Song song;
-        if (queueList.size() > 0) {
-
-            song=queueList.get(0);
+        if (!queueList.isEmpty()) {
+            song = queueList.get(0);
             slideShow.open(song);
             queueList.remove(0);
             queueTableView.getItems().setAll(queueList);
-            project.loadImage(slideShow.currentSlide());
+            Image currentSlide = slideShow.currentSlide();
+            setPreview(currentSlide);
+            project.loadImage(currentSlide);
             project.show();
-
-//            song = queueTableView.getSelectionModel().getSelectedItem();
-//            if (song != null) {
-//                slideShow.open(song);
-//                project.loadImage(slideShow.currentSlide());
-//                project.show();
-//            } else {
-//                song = queueList.get(currentPresentation);
-//                if (slideShow.open(song)) {
-//                    project.loadImage(slideShow.currentSlide());
-//                    project.show();
-//                }
-//            }
         } else {
             isProjecting = false;
             AlertFactory
@@ -127,47 +120,40 @@ public class SearchController implements Initializable {
     private void stopSong() {
         queueTableView.getItems().setAll(queueList);
         isProjecting = false;
-        project.loadBG();
-
-//        currentPresentation = 0;
+        project.loadBG(DEFAULT_BACKGROUND);
     }
 
     @FXML
     private void nextSlide() {
         try {
-            project.loadImage(slideShow.nextSlide());
+            Image currentSlide = slideShow.nextSlide();
+            setPreview(currentSlide);
+            project.loadImage(currentSlide);
         } catch (RuntimeException e) {
             nextPresentation();
+        }
+    }
+
+    @FXML
+    private void previousSlide() {
+        try {
+            Image currentSlide = slideShow.prevSlide();
+            setPreview(currentSlide);
+            project.loadImage(currentSlide);
+        } catch (RuntimeException ignored) {
+
         }
     }
 
     private void nextPresentation() {
         try {
             this.queueTableView.getItems().setAll(queueList);
-           if(!queueList.isEmpty())
-            playSong();
-           else
-           {
-               stopSong();
-           }
-        }
-        catch (RuntimeException e)
-        {
-//w/e
-        }
-
-//        currentPresentation++;
-//        if (queueList.size() > currentPresentation) {
-//            playSong();
-//        }
-    }
-
-    @FXML
-    private void previousSlide() {
-        try {
-            project.loadImage(slideShow.prevSlide());
-        } catch (RuntimeException ignored) {
-
+            if (!queueList.isEmpty())
+                playSong();
+            else
+                stopSong();
+        } catch (RuntimeException e) {
+            // nothing here
         }
     }
 
@@ -235,6 +221,7 @@ public class SearchController implements Initializable {
     @FXML
     private void saintCategory() {
         setFilters(6);
+        searchSong();
     }
 
     private void setFilters(int filterId) {
@@ -266,6 +253,7 @@ public class SearchController implements Initializable {
 
         project.show();
 
+        setPreview(DEFAULT_BACKGROUND);
     }
 
     private List<Song> reduceDuplicates(List<Song> songs) {
@@ -277,5 +265,9 @@ public class SearchController implements Initializable {
                         toRemoveList.add(searchSong);
         songs.removeAll(toRemoveList);
         return songs;
+    }
+
+    private void setPreview(Image currentSlide) {
+        this.imagePreview.setImage(currentSlide);
     }
 }
