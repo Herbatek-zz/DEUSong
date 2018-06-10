@@ -91,8 +91,20 @@ public class SearchController implements Initializable {
 
     @FXML
     private void clearQueue() {
-        queueList.clear();
-        queueTableView.getItems().clear();
+        if (queueTableView.getItems().isEmpty())
+            AlertFactory
+                    .createError("Nie możesz wyczyścić pustej listy")
+                    .showAndWait();
+        else if (isProjecting)
+            AlertFactory
+                    .createError("Nie możesz wyczyścić kolejki podczas projekcji")
+                    .showAndWait();
+        else {
+            queueList.clear();
+            queueTableView.getItems().clear();
+            List<Song> songs = search.findByTitle("");
+            songsTableView.getItems().setAll(songs);
+        }
     }
 
     @FXML
@@ -242,21 +254,6 @@ public class SearchController implements Initializable {
             bg.getStylesheets().clear();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        queueCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        queueNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-        searchCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        searchTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-        songsTableView.getItems().setAll(search.findByTitle(""));
-
-        project.show();
-
-        setPreview(DEFAULT_BACKGROUND);
-    }
-
     private List<Song> reduceDuplicates(List<Song> songs) {
         List<Song> toRemoveList = new ArrayList<>();
         if (songs.size() > 0 && queueTableView.getItems().size() > 0)
@@ -270,5 +267,20 @@ public class SearchController implements Initializable {
 
     private void setPreview(Image currentSlide) {
         this.imagePreview.setImage(currentSlide);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        queueCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        queueNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        searchCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        searchTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        songsTableView.getItems().setAll(search.findByTitle(""));
+
+        project.show();
+
+        setPreview(DEFAULT_BACKGROUND);
     }
 }
