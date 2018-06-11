@@ -35,7 +35,8 @@ public class Search {
     private void search(String text, String directory, String category) {
         File dir = new File(directory);
 
-        File[] files = dir.listFiles((dir1, name) -> StringUtils.containsIgnoreCase(name, text) && name.endsWith(".pptx"));
+        File[] files = dir.listFiles((dir1, name) -> StringUtils.containsIgnoreCase(name, text)
+                && (name.endsWith(".pptx") || name.endsWith(".ppt") || name.endsWith(".pps")));
 
         if (files != null)
             for (File file : files)

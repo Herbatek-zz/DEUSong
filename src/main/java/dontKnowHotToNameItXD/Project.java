@@ -8,6 +8,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import static javafx.stage.StageStyle.UNDECORATED;
 
 public class Project {
 
@@ -44,31 +47,9 @@ public class Project {
         StackPane stackPane = new StackPane(imageView);
         stackPane.setStyle("-fx-background-color: #000000;");
         Scene scene = new Scene(stackPane);
-
-        scene.setOnKeyPressed(event -> {
-//        switch (e.getKeyCode()) {
-//            case KeyEvent.VK_NUMPAD1: {
-//                slide.prevSlide(this);
-//            }
-//            break;
-//
-//            case KeyEvent.VK_NUMPAD3: {
-//                slide.nextSlide(this);
-//            }
-//            break;
-//            case KeyEvent.VK_NUMPAD7: {
-//                if (isProjecting) slide.open(filename);
-//                else slide.end();
-//            }
-//            break;
-//
-//            case KeyEvent.VK_NUMPAD9: {
-//                //next in queue
-//            }
-        });
-
         stage.setScene(scene);
-
+        stage.initStyle(UNDECORATED);
+        stage.setAlwaysOnTop(true);
     }
 
     public void loadImage(Image image) {

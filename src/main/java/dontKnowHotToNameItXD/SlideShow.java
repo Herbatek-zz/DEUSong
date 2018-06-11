@@ -8,6 +8,7 @@ import org.apache.poi.xslf.usermodel.XSLFSlide;
 
 import java.awt.*;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,30 +19,20 @@ public class SlideShow {
     private Dimension dimension;
     private SlideToImageConverter slide2Img = new SlideToImageConverter();
 
-    public void open(Song song) {
+    public void open(Song song) throws IOException {
         XMLSlideShow slideShow = songToSlideShow(song);
         dimension = slideShow.getPageSize();
         slides = slideShow.getSlides();
         slideNumber = 0;
     }
 
-    private XMLSlideShow songToSlideShow(Song song) {
-        XMLSlideShow slideShow = null;
-        try {
-            slideShow = new XMLSlideShow(new FileInputStream(song.getFile()));
-        } catch (IOException e) {
-            AlertFactory
-                    .createError("Plik nie istnieje")
-                    .showAndWait();
-        } catch (EmptyFileException e) {
-            AlertFactory
-                    .createError("Plik jest pusty")
-                    .showAndWait();
-        }
+    private XMLSlideShow songToSlideShow(Song song) throws IOException {
+        XMLSlideShow slideShow = new XMLSlideShow(new FileInputStream(song.getFile()));
+
         return slideShow;
     }
 
-    public Image currentSlide() {
+    public Image currentSlide() throws NullPointerException{
         XSLFSlide slide = slides.get(slideNumber);
         return slide2Img.toImage(slide, dimension);
     }

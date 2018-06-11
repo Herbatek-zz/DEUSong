@@ -10,8 +10,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import org.apache.poi.EmptyFileException;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +111,7 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void playSong() {
+    private void playSong() throws IOException {
         isProjecting = true;
         Song song;
         if (!queueList.isEmpty()) {
@@ -167,11 +170,13 @@ public class SearchController implements Initializable {
                 stopSong();
         } catch (RuntimeException e) {
             // nothing here
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     @FXML
-    private void keyListener(KeyEvent event) {
+    private void keyListener(KeyEvent event) throws IOException {
         switch (event.getCode()) {
             case NUMPAD1:
             case DIGIT1:
@@ -278,6 +283,28 @@ public class SearchController implements Initializable {
         searchTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         songsTableView.getItems().setAll(search.findByTitle(""));
+
+        songsTableView.setOnMouseClicked((MouseEvent event) -> {
+            Song song = songsTableView.getSelectionModel().getSelectedItem();
+            Image currentSlide = null;
+            if (!isProjecting && !songsTableView.getItems().isEmpty() && song != null) {
+                try {
+                    slideShow.open(song);
+                    currentSlide = slideShow.currentSlide();
+                    setPreview(currentSlide);
+                } catch (IOException e) {
+                    AlertFactory
+                            .createError("Błąd podczas otwierania pliku")
+                            .showAndWait();
+                    setPreview(DEFAULT_BACKGROUND);
+                } catch (EmptyFileException | NullPointerException ex) {
+                    AlertFactory
+                            .createError("Plik jest pusty")
+                            .showAndWait();
+                    setPreview(DEFAULT_BACKGROUND);
+                }
+            }
+        });
 
         project.show();
 

@@ -13,7 +13,7 @@ public class Song {
     private File file;
 
     public Song(String title, String category, String path, File file) {
-        this.title = new SimpleStringProperty(title);
+        this.title = new SimpleStringProperty(removeExtension(title));
         this.category = new SimpleStringProperty(category);
         this.path = new SimpleStringProperty(path);
         this.file = file;
@@ -54,4 +54,16 @@ public class Song {
     public void setFile(File file) {
         this.file = file;
     }
+
+    private String removeExtension(String title) {
+        if(title.endsWith(".ppt")) {
+            title = title.substring(0, title.length() - 4);
+        }
+        else if(title.endsWith(".pptx")) {
+            title = title.substring(0, title.length() - 5);
+        }
+
+        return title;
+    }
 }
+
