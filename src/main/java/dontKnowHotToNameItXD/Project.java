@@ -64,10 +64,6 @@ public class Project {
         stage.close();
     }
 
-    public void loadBG(Image image) {
-        imageView.setImage(image);
-    }
-
 
 }
 

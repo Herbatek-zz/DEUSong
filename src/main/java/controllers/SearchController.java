@@ -3,6 +3,7 @@ package controllers;
 import dontKnowHotToNameItXD.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,8 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import org.apache.poi.EmptyFileException;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,6 +54,9 @@ public class SearchController implements Initializable {
     private ImageView imagePreview;
 
     @FXML
+    private Button loadBackground;
+
+    @FXML
     private AnchorPane bg;
 
     @FXML
@@ -63,7 +70,7 @@ public class SearchController implements Initializable {
     private ObservableList<Song> queueList = FXCollections.observableArrayList();
     private Search search = new Search();
 
-    private final Image DEFAULT_BACKGROUND = new Image("/obrazy/default.jpg");
+    private Image background;
 
     @FXML
     private void searchSong() {
@@ -150,8 +157,8 @@ public class SearchController implements Initializable {
     private void stopSong() {
         queueTableView.getItems().setAll(queueList);
         isProjecting = false;
-        project.loadBG(DEFAULT_BACKGROUND);
-        setPreview(DEFAULT_BACKGROUND);
+        project.loadImage(background);
+        setPreview(background);
     }
 
     @FXML
@@ -291,6 +298,8 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        background = new Image("/obrazy/default.jpg");
+
         queueCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         queueNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 
@@ -301,7 +310,7 @@ public class SearchController implements Initializable {
 
         songsTableView.setOnMouseClicked((MouseEvent event) -> {
             Song song = songsTableView.getSelectionModel().getSelectedItem();
-            Image currentSlide = null;
+            Image currentSlide;
             if (!isProjecting && !songsTableView.getItems().isEmpty() && song != null) {
                 try {
                     slideShow.open(song);
@@ -311,18 +320,40 @@ public class SearchController implements Initializable {
                     AlertFactory
                             .createError("Błąd podczas otwierania pliku")
                             .showAndWait();
-                    setPreview(DEFAULT_BACKGROUND);
+                    setPreview(background);
                 } catch (EmptyFileException | NullPointerException ex) {
                     AlertFactory
                             .createError("Plik jest pusty")
                             .showAndWait();
-                    setPreview(DEFAULT_BACKGROUND);
+                    setPreview(background);
+                }
+            }
+        });
+
+        loadBackground.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/desktop"));
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png")
+            );
+            File file = fileChooser.showOpenDialog(null);
+            if(file != null) {
+                background = new Image(file.toURI().toString());
+                setPreview(background);
+                project.loadImage(background);
+                try {
+                    ImageIO.write(SwingFXUtils.fromFXImage(background, null), "jpg", new File("src\\main\\resources\\obrazy\\default.jpg"));
+                } catch (IOException e) {
+                    AlertFactory
+                            .createError("Wystąpił błąd podczas utawiania obrazu")
+                            .showAndWait();
                 }
             }
         });
 
         project.show();
 
-        setPreview(DEFAULT_BACKGROUND);
+        setPreview(background);
     }
 }
