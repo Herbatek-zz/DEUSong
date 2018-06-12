@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -152,7 +153,7 @@
                 <Insets left="10.0" top="10.0" />
             </padding>
         </FlowPane>
-        <Button layoutX="921.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wyczyść kolejkę">
+        <Button layoutX="800.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wyczyść kolejkę">
             <font>
                 <Font size="18.0" />
             </font>
@@ -160,26 +161,74 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Button layoutX="64.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong" text="Start">
+      <Button layoutX="1000.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wczytaj tło">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+        <Button layoutX="44.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+            <graphic>
+                <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+                    <image>
+                        <Image url="@buttons/play.png" />
+                    </image>
+                </ImageView>
+            </graphic>
         </Button>
-        <Button layoutX="121.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong" text="Stop">
+        <Button layoutX="141.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+            <graphic>
+                <ImageView fitHeight="64" fitWidth="64">
+                    <image>
+                        <Image url="@buttons/stop.png" />
+                    </image>
+                </ImageView>
+            </graphic>
         </Button>
-        <Button layoutX="292.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide" text="Poprzedni">
+        <Button layoutX="332.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+            <graphic>
+                <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+                    <image>
+                        <Image url="@buttons/next.png" />
+                    </image>
+                </ImageView>
+            </graphic>
         </Button>
-        <Button layoutX="207.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide" text="Następny">
+        <Button layoutX="237.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+            <graphic>
+                <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+                    <image>
+                        <Image url="@buttons/previous.png" />
+                    </image>
+                </ImageView>
+            </graphic>
         </Button>
+      <Button layoutX="430.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@buttons/nextSong.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 
 </AnchorPane>
