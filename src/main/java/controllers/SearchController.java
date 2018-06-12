@@ -52,6 +52,9 @@ public class SearchController implements Initializable {
     @FXML
     private AnchorPane bg;
 
+    @FXML
+    private ImageView playStop;
+
     private SlideShow slideShow = new SlideShow();
     private Project project = new Project();
     private boolean isProjecting = false;
@@ -112,23 +115,35 @@ public class SearchController implements Initializable {
 
     @FXML
     private void playSong() throws IOException {
-        isProjecting = true;
-        Song song;
-        if (!queueList.isEmpty()) {
-            song = queueList.get(0);
-            slideShow.open(song);
-            queueList.remove(0);
-            queueTableView.getItems().setAll(queueList);
-            Image currentSlide = slideShow.currentSlide();
-            setPreview(currentSlide);
-            project.loadImage(currentSlide);
-            project.show();
-        } else {
-            isProjecting = false;
-            AlertFactory
-                    .createError("Kolejka jest pusta")
-                    .showAndWait();
+        if (!isProjecting) {
+            isProjecting = true;
+            Song song;
+            if (!queueList.isEmpty()) {
+                song = queueList.get(0);
+                slideShow.open(song);
+                queueList.remove(0);
+                queueTableView.getItems().setAll(queueList);
+                Image currentSlide = slideShow.currentSlide();
+                setPreview(currentSlide);
+                project.loadImage(currentSlide);
+                Image stop = new Image("buttons/stop.png");
+                playStop.setImage(stop);
+                project.show();
+            } else {
+                isProjecting = false;
+                AlertFactory
+                        .createError("Kolejka jest pusta")
+                        .showAndWait();
+            }
         }
+        else {
+            isProjecting = false;
+            Image play = new Image("buttons/play.png");
+            playStop.setImage(play);
+            stopSong();
+        }
+
+
     }
 
     @FXML

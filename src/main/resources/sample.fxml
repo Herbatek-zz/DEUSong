@@ -174,26 +174,14 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
             <graphic>
-                <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+                <ImageView fx:id="playStop" fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
                     <image>
                         <Image url="@buttons/play.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <Button layoutX="141.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-            <graphic>
-                <ImageView fitHeight="64" fitWidth="64">
-                    <image>
-                        <Image url="@buttons/stop.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button layoutX="332.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
+        <Button layoutX="236.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -205,7 +193,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button layoutX="237.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide">
+        <Button layoutX="141.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -217,7 +205,7 @@
                 </ImageView>
             </graphic>
         </Button>
-      <Button layoutX="430.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
+      <Button layoutX="334.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
