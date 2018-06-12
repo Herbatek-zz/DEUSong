@@ -134,6 +134,8 @@ public class SearchController implements Initializable {
                 setPreview(currentSlide);
                 project.loadImage(currentSlide);
                 Image stop = new Image("buttons/stop.png");
+                playStop.setScaleX(1.1);
+                playStop.setScaleY(1.1);
                 playStop.setImage(stop);
                 project.show();
             } else {
@@ -145,8 +147,6 @@ public class SearchController implements Initializable {
         }
         else {
             isProjecting = false;
-            Image play = new Image("buttons/play.png");
-            playStop.setImage(play);
             stopSong();
         }
 
@@ -159,6 +159,11 @@ public class SearchController implements Initializable {
         isProjecting = false;
         project.loadImage(background);
         setPreview(background);
+        Image play = new Image("buttons/play.png");
+        playStop.setScaleX(0.8);
+        playStop.setScaleY(0.8);
+        playStop.setImage(play);
+
     }
 
     @FXML
