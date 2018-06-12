@@ -145,10 +145,7 @@ public class SearchController implements Initializable {
                         .showAndWait();
             }
         }
-        else {
-            isProjecting = false;
-            stopSong();
-        }
+        else stopSong();
 
 
     }
