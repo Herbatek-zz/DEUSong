@@ -300,7 +300,7 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        background = new Image("/obrazy/default.jpg");
+        background = new Image("/obrazy/background.jpg");
 
         queueCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         queueNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
