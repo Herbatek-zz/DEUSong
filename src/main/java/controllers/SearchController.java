@@ -346,10 +346,10 @@ public class SearchController implements Initializable {
                 setPreview(background);
                 project.loadImage(background);
                 try {
-                    if(path.endsWith(".jpg"))
-                        ImageIO.write(SwingFXUtils.fromFXImage(background, null), "jpg", new File("src\\main\\resources\\obrazy\\default.jpg"));
-                    else if(path.endsWith(".png"))
-                        ImageIO.write(SwingFXUtils.fromFXImage(background, null), "png", new File("src\\main\\resources\\obrazy\\default.jpg"));
+                    if(path.endsWith(".jpg")) {
+                        saveImage("jpg");
+                    } else if(path.endsWith(".png"))
+                        saveImage("png");
 
                 } catch (IOException e) {
                     AlertFactory
@@ -362,5 +362,9 @@ public class SearchController implements Initializable {
         project.show();
 
         setPreview(background);
+    }
+
+    private void saveImage(String jpg) throws IOException {
+        ImageIO.write(SwingFXUtils.fromFXImage(background, null), jpg, new File("src\\main\\resources\\obrazy\\background.jpg"));
     }
 }
