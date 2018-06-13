@@ -35,7 +35,7 @@ public class Project {
         stage.setHeight(projector.getBounds().getHeight());
         stage.setFullScreen(true);
 
-        image = new Image("/obrazy/default.jpg");
+        image = new Image("/obrazy/background.jpg");
 
         imageView = new ImageView(image);
         imageView.setFitHeight(Screen.getPrimary().getBounds().getHeight());
