@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 public class SearchController implements Initializable {
 
     @FXML
-    private TableView<Song> songsTableView;
+    private TableView<Song> searchTableView;
 
     @FXML
     private TableColumn<Song, String> searchCategoryColumn;
@@ -57,20 +57,26 @@ public class SearchController implements Initializable {
     private Button loadBackground;
 
     @FXML
+    private Button defaultBackground;
+
+    @FXML
     private AnchorPane bg;
 
     @FXML
     private ImageView playStop;
 
-    private SlideShow slideShow = new SlideShow();
-    private Project project = new Project();
+    private final Image STOP_BUTTON = new Image("buttons/stop.png");
+    private final Image PLAY_BUTTON = new Image("buttons/play.png");
+
+    private final SlideShow slideShow = new SlideShow();
+    private final Project project = new Project();
+    private final Search search = new Search();
     private boolean isProjecting = false;
 
     private ObservableList<Song> searchList = FXCollections.observableArrayList();
     private ObservableList<Song> queueList = FXCollections.observableArrayList();
-    private Search search = new Search();
 
-    private Image background;
+    private Image background = new Image("/obrazy/background.jpg");
 
     @FXML
     private void searchSong() {
@@ -78,7 +84,7 @@ public class SearchController implements Initializable {
         List<Song> foundSongs = search.findByTitle(searchBar.getText());
         foundSongs = reduceDuplicates(foundSongs);
         searchList.addAll(foundSongs);
-        songsTableView.getItems().setAll(searchList);
+        searchTableView.getItems().setAll(searchList);
     }
 
     @FXML
@@ -88,7 +94,7 @@ public class SearchController implements Initializable {
 
     @FXML
     private void addToQueue() {
-        Song song = songsTableView.getSelectionModel().getSelectedItem();
+        Song song = searchTableView.getSelectionModel().getSelectedItem();
         if (song == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Błąd");
@@ -98,7 +104,7 @@ public class SearchController implements Initializable {
         } else {
             this.queueList.add(song);
             this.queueTableView.getItems().setAll(queueList);
-            this.songsTableView.getItems().remove(song);
+            this.searchTableView.getItems().remove(song);
         }
     }
 
@@ -116,67 +122,51 @@ public class SearchController implements Initializable {
             queueList.clear();
             queueTableView.getItems().clear();
             List<Song> songs = search.findByTitle("");
-            songsTableView.getItems().setAll(songs);
+            searchTableView.getItems().setAll(songs);
         }
     }
 
     @FXML
-   private void playButton() throws IOException
-    {
-        if(!isProjecting)
-        {
+    private void playButton() throws IOException {
+        if (!isProjecting)
             playSong();
-        }
         else
-        {
             stopSong();
-        }
     }
 
-
-
     private void playSong() throws IOException {
-        {
-            isProjecting = true;
-            loadBackground.setDisable(true);
-            Song song;
-            if (!queueList.isEmpty()) {
-                song = queueList.get(0);
-                slideShow.open(song);
+        isProjecting = true;
+        loadBackground.setDisable(true);
+        Song song;
+        if (!queueList.isEmpty()) {
+            song = queueList.get(0);
+            slideShow.open(song);
 
-                Image currentSlide = slideShow.currentSlide();
-                Image previewSlide = slideShow.previewNextSlide();
-                setPreview(previewSlide);
+            Image currentSlide = slideShow.currentSlide();
+            Image previewSlide = slideShow.previewNextSlide();
+            setPreview(previewSlide);
 
-                project.loadImage(currentSlide);
-                Image stop = new Image("buttons/stop.png");
-                playStop.setScaleX(1.1);
-                playStop.setScaleY(1.1);
-                playStop.setImage(stop);
-                project.show();
-            } else {
-                isProjecting = false;
-                AlertFactory
-                        .createError("Kolejka jest pusta")
-                        .showAndWait();
-            }
+            project.loadImage(currentSlide);
+            playStop.setImage(STOP_BUTTON);
+            project.show();
+        } else {
+            isProjecting = false;
+            AlertFactory
+                    .createError("Kolejka jest pusta")
+                    .showAndWait();
         }
-
     }
 
     @FXML
     private void stopSong() {
         if (!queueList.isEmpty())
-        queueList.remove(0);
+            queueList.remove(0);
         queueTableView.getItems().setAll(queueList);
         isProjecting = false;
         loadBackground.setDisable(false);
         project.loadImage(background);
         setPreview(background);
-        Image play = new Image("buttons/play.png");
-        playStop.setScaleX(0.8);
-        playStop.setScaleY(0.8);
-        playStop.setImage(play);
+        playStop.setImage(PLAY_BUTTON);
 
     }
 
@@ -184,34 +174,27 @@ public class SearchController implements Initializable {
     private void nextSlide() {
         try {
             Image currentSlide = slideShow.nextSlide();
-
-
             project.loadImage(currentSlide);
         } catch (RuntimeException e) {
             nextPresentation();
         }
-       try {
-           Image previewSlide = slideShow.previewNextSlide();
-           setPreview(previewSlide);
-       }
-       catch (RuntimeException ignored)
-       {
-           //xD
-       }
+        try {
+            Image previewSlide = slideShow.previewNextSlide();
+            setPreview(previewSlide);
+        } catch (RuntimeException ignored) {
+            //xD
+        }
     }
 
     @FXML
     private void previousSlide() {
         try {
             Image currentSlide = slideShow.prevSlide();
-            setPreview(currentSlide);
             project.loadImage(currentSlide);
             try {
                 Image previewSlide = slideShow.previewNextSlide();
                 setPreview(previewSlide);
-            }
-            catch (RuntimeException ignored)
-            {
+            } catch (RuntimeException ignored) {
                 //xD
             }
         } catch (RuntimeException ignored) {
@@ -225,13 +208,9 @@ public class SearchController implements Initializable {
             this.queueTableView.getItems().setAll(queueList);
             queueList.remove(0);
             if (!queueList.isEmpty()) {
-
-
-
                 queueTableView.getItems().setAll(queueList);
                 playSong();
-            }
-                else {
+            } else {
 
                 stopSong();
             }
@@ -255,7 +234,7 @@ public class SearchController implements Initializable {
                 break;
             case NUMPAD7:
             case DIGIT7:
-               playButton();
+                playButton();
                 break;
             case NUMPAD9:
             case DIGIT9:
@@ -334,13 +313,22 @@ public class SearchController implements Initializable {
         return songs;
     }
 
-    private void setPreview(Image currentSlide) {
-        this.imagePreview.setImage(currentSlide);
+    private void setPreview(Image nextSlide) {
+        this.imagePreview.setImage(nextSlide);
+    }
+
+    private void saveBackground(String extension) {
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(background, null), extension, new File("src\\main\\resources\\obrazy\\background.jpg"));
+        } catch (IOException e) {
+            AlertFactory
+                    .createError("Wystąpił błąd podczas utawiania obrazu")
+                    .showAndWait();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        background = new Image("/obrazy/background.jpg");
 
         queueCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         queueNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -348,12 +336,12 @@ public class SearchController implements Initializable {
         searchCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         searchTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 
-        songsTableView.getItems().setAll(search.findByTitle(""));
+        searchTableView.getItems().setAll(search.findByTitle(""));
 
-        songsTableView.setOnMouseClicked((MouseEvent event) -> {
-            Song song = songsTableView.getSelectionModel().getSelectedItem();
+        searchTableView.setOnMouseClicked((MouseEvent event) -> {
+            Song song = searchTableView.getSelectionModel().getSelectedItem();
             Image currentSlide;
-            if (!isProjecting && !songsTableView.getItems().isEmpty() && song != null) {
+            if (!isProjecting && !searchTableView.getItems().isEmpty() && song != null) {
                 try {
                     slideShow.open(song);
                     currentSlide = slideShow.currentSlide();
@@ -374,35 +362,30 @@ public class SearchController implements Initializable {
 
         loadBackground.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/desktop"));
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("Pliki graficzne", "*.jpg", "*.png"));
             File file = fileChooser.showOpenDialog(null);
-            if(file != null) {
+            if (file != null) {
                 String path = file.toURI().toString();
                 background = new Image(path);
                 setPreview(background);
                 project.loadImage(background);
-                try {
-                    if(path.endsWith(".jpg")) {
-                        saveImage("jpg");
-                    } else if(path.endsWith(".png"))
-                        saveImage("png");
-
-                } catch (IOException e) {
-                    AlertFactory
-                            .createError("Wystąpił błąd podczas utawiania obrazu")
-                            .showAndWait();
-                }
+                if (path.endsWith(".jpg")) {
+                    saveBackground("jpg");
+                } else if (path.endsWith(".png"))
+                    saveBackground("png");
             }
         });
 
-        project.show();
+        defaultBackground.setOnAction(event -> {
+            background = new Image("/obrazy/default.jpg");
+            saveBackground("jpg");
+            setPreview(background);
+            project.loadImage(background);
+        });
 
         setPreview(background);
-    }
-
-    private void saveImage(String jpg) throws IOException {
-        ImageIO.write(SwingFXUtils.fromFXImage(background, null), jpg, new File("src\\main\\resources\\obrazy\\background.jpg"));
+        project.show();
     }
 }

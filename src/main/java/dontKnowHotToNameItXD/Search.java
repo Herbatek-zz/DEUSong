@@ -31,7 +31,6 @@ public class Search {
         return songs;
     }
 
-
     private void search(String text, String directory, String category) {
         File dir = new File(directory);
 
@@ -41,23 +40,10 @@ public class Search {
         if (files != null)
             for (File file : files)
                 songs.add(FileToSongConverter.toSong(file, category));
-
     }
 
     public Filter[] getFilters() {
         return filters;
-    }
-
-    public void setFilters(Filter[] filters) {
-        this.filters = filters;
-    }
-
-    public boolean isAllFiltersTrue(Filter[] filters) {
-        for (Filter filter : filters) {
-            if (!filter.getState())
-                return false;
-        }
-        return true;
     }
 
     public void setAllFiltersFalse(Filter[] filters) {

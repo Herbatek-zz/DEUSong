@@ -56,13 +56,10 @@ public class Song {
     }
 
     private String removeExtension(String title) {
-        if(title.endsWith(".ppt")) {
+        if (title.endsWith(".ppt"))
             title = title.substring(0, title.length() - 4);
-        }
-        else if(title.endsWith(".pptx")) {
+        else if (title.endsWith(".pptx"))
             title = title.substring(0, title.length() - 5);
-        }
-
         return title;
     }
 }

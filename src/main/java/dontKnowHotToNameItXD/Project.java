@@ -15,8 +15,8 @@ import static javafx.stage.StageStyle.UNDECORATED;
 public class Project {
 
     private Stage stage;
-    ImageView imageView;
-    Image image;
+    private ImageView imageView;
+    private final String BACKGROUND_PATH = "/obrazy/background.jpg";
 
     public Project() {
 
@@ -27,7 +27,6 @@ public class Project {
         else
             projector = screens.get(0);
 
-
         stage = new Stage();
         stage.setX(projector.getVisualBounds().getMinX());
         stage.setY(projector.getVisualBounds().getMinY());
@@ -35,11 +34,9 @@ public class Project {
         stage.setHeight(projector.getBounds().getHeight());
         stage.setFullScreen(true);
 
-        image = new Image("/obrazy/background.jpg");
-
-        imageView = new ImageView(image);
-        imageView.setFitHeight(Screen.getPrimary().getBounds().getHeight());
-        imageView.setFitWidth(Screen.getPrimary().getBounds().getWidth());
+        imageView = new ImageView(new Image(BACKGROUND_PATH));
+        imageView.setFitHeight(projector.getBounds().getHeight());
+        imageView.setFitWidth(projector.getBounds().getWidth());
         imageView.setSmooth(true);
         imageView.setPreserveRatio(true);
         imageView.setCache(true);
@@ -58,10 +55,6 @@ public class Project {
 
     public void show() {
         stage.show();
-    }
-
-    public void close() {
-        stage.close();
     }
 
 

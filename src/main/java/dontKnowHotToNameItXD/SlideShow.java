@@ -27,12 +27,10 @@ public class SlideShow {
     }
 
     private XMLSlideShow songToSlideShow(Song song) throws IOException {
-        XMLSlideShow slideShow = new XMLSlideShow(new FileInputStream(song.getFile()));
-
-        return slideShow;
+        return new XMLSlideShow(new FileInputStream(song.getFile()));
     }
 
-    public Image currentSlide() throws NullPointerException{
+    public Image currentSlide() throws NullPointerException {
         XSLFSlide slide = slides.get(slideNumber);
         return slide2Img.toImage(slide, dimension);
     }
@@ -46,26 +44,17 @@ public class SlideShow {
         throw new RuntimeException("Nie ma następnego slajdu");
     }
 
-    public Image previewNextSlide()
-    {
-        if (slides.size() > slideNumber +1) {
-
+    public Image previewNextSlide() {
+        if (slides.size() > slideNumber + 1) {
             XSLFSlide slide = slides.get(slideNumber + 1);
             return slide2Img.toImage(slide, dimension);
-
-        }
-        else
-            if (slides.size() > slideNumber){
+        } else if (slides.size() > slideNumber) {
             XSLFSlide slide = slides.get(slideNumber);
             return slide2Img.toImage(slide, dimension);
         }
 
         throw new RuntimeException("Nie ma następnego slajdu");
-
-
-        }
-
-
+    }
 
     public Image prevSlide() {
         if (0 < slideNumber) {

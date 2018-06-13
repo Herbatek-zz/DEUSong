@@ -121,7 +121,7 @@
         </ToggleButton> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
         <ImageView fx:id="imagePreview" fitHeight="400.0" fitWidth="607.0" layoutX="640.0" layoutY="67.0" pickOnBounds="true">
         </ImageView>
-        <TableView fx:id="songsTableView" layoutX="20.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
+        <TableView fx:id="searchTableView" layoutX="20.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
             <placeholder>
                 <Label text="" />
             </placeholder>
@@ -217,7 +217,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="loadBackground1" layoutX="1070.0" layoutY="606.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Domyślne tło">
+      <Button fx:id="defaultBackground" layoutX="1070.0" layoutY="606.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Domyślne tło">
          <font>
             <Font size="18.0" />
          </font>

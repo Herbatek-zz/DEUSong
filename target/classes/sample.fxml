@@ -101,7 +101,7 @@
                 <Insets left="15.0" right="5.0" top="5.0" />
             </padding>
         </FlowPane>
-        <TableView fx:id="queueTableView" layoutX="785.0" layoutY="479.0" prefHeight="160.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
+        <TableView fx:id="queueTableView" layoutX="640.0" layoutY="472.0" prefHeight="192.0" prefWidth="414.0"> <!--- Podgląd dodanych pieśni do kolejki -->
             <placeholder>
                 <Label text="" />
             </placeholder>
@@ -121,7 +121,7 @@
         </ToggleButton> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
         <ImageView fx:id="imagePreview" fitHeight="400.0" fitWidth="607.0" layoutX="640.0" layoutY="67.0" pickOnBounds="true">
         </ImageView>
-        <TableView fx:id="songsTableView" layoutX="20.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
+        <TableView fx:id="searchTableView" layoutX="20.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
             <placeholder>
                 <Label text="" />
             </placeholder>
@@ -138,9 +138,9 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <FlowPane hgap="30.0" layoutX="15.0" layoutY="455.0" prefHeight="72.0" prefWidth="128.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
+        <FlowPane hgap="30.0" layoutX="15.0" layoutY="455.0" prefHeight="72.0" prefWidth="169.0"> <!--- Panel dodawania do kolejki i czyszczenia wyszukiwarki -->
             <children>
-                <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="100.0" text="Dodaj">
+                <Button mnemonicParsing="false" onAction="#addToQueue" prefHeight="48.0" prefWidth="156.0" text="Dodaj do kolejki">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -153,7 +153,7 @@
                 <Insets left="10.0" top="10.0" />
             </padding>
         </FlowPane>
-        <Button layoutX="800.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wyczyść kolejkę">
+        <Button layoutX="1070.0" layoutY="482.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wyczyść kolejkę">
             <font>
                 <Font size="18.0" />
             </font>
@@ -161,7 +161,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <Button  fx:id="loadBackground" layoutX="1000.0" layoutY="645.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wczytaj tło">
+      <Button fx:id="loadBackground" layoutX="1070.0" layoutY="546.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wczytaj tło">
          <font>
             <Font size="18.0" />
          </font>
@@ -169,31 +169,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-        <Button layoutX="44.0" layoutY="596.0" mnemonicParsing="false" onAction="#playSong">
+        <Button layoutX="44.0" layoutY="596.0" mnemonicParsing="false" onAction="#playButton">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
             <graphic>
-                <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+                <ImageView fx:id="playStop" fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
                     <image>
                         <Image url="@buttons/play.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <Button layoutX="141.0" layoutY="596.0" mnemonicParsing="false" onAction="#stopSong">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-            <graphic>
-                <ImageView fitHeight="64" fitWidth="64">
-                    <image>
-                        <Image url="@buttons/stop.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button layoutX="332.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
+        <Button layoutX="236.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -205,7 +193,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button layoutX="237.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide">
+        <Button layoutX="141.0" layoutY="596.0" mnemonicParsing="false" onAction="#previousSlide">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -217,7 +205,7 @@
                 </ImageView>
             </graphic>
         </Button>
-      <Button layoutX="430.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextSlide">
+      <Button layoutX="334.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextPresentation">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -228,6 +216,14 @@
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <Button fx:id="defaultBackground" layoutX="1070.0" layoutY="606.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Domyślne tło">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
     </children>
 

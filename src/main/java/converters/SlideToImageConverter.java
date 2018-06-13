@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class SlideToImageConverter {
 
-    public BufferedImage toBufferedImage(XSLFSlide slide, Dimension dimension) {
+    private BufferedImage toBufferedImage(XSLFSlide slide, Dimension dimension) {
         BufferedImage bufferedImage = new BufferedImage(dimension.width, dimension.height, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bufferedImage.createGraphics();
 
