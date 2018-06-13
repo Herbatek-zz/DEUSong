@@ -341,11 +341,16 @@ public class SearchController implements Initializable {
             );
             File file = fileChooser.showOpenDialog(null);
             if(file != null) {
-                background = new Image(file.toURI().toString());
+                String path = file.toURI().toString();
+                background = new Image(path);
                 setPreview(background);
                 project.loadImage(background);
                 try {
-                    ImageIO.write(SwingFXUtils.fromFXImage(background, null), "jpg", new File("src\\main\\resources\\obrazy\\default.jpg"));
+                    if(path.endsWith(".jpg"))
+                        ImageIO.write(SwingFXUtils.fromFXImage(background, null), "jpg", new File("src\\main\\resources\\obrazy\\default.jpg"));
+                    else if(path.endsWith(".png"))
+                        ImageIO.write(SwingFXUtils.fromFXImage(background, null), "png", new File("src\\main\\resources\\obrazy\\default.jpg"));
+
                 } catch (IOException e) {
                     AlertFactory
                             .createError("Wystąpił błąd podczas utawiania obrazu")
