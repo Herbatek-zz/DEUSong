@@ -19,6 +19,7 @@ import org.apache.poi.EmptyFileException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.PlatformLoggingMXBean;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,6 +138,7 @@ public class SearchController implements Initializable {
     private void playSong() throws IOException {
         isProjecting = true;
         loadBackground.setDisable(true);
+        defaultBackground.setDisable(true);
         Song song;
         if (!queueList.isEmpty()) {
             song = queueList.get(0);
@@ -151,6 +153,8 @@ public class SearchController implements Initializable {
             project.show();
         } else {
             isProjecting = false;
+            loadBackground.setDisable(false);
+            defaultBackground.setDisable(false);
             AlertFactory
                     .createError("Kolejka jest pusta")
                     .showAndWait();
@@ -162,16 +166,22 @@ public class SearchController implements Initializable {
         if (!queueList.isEmpty())
             queueList.remove(0);
         queueTableView.getItems().setAll(queueList);
+        searchTableView.getItems().setAll(reduceDuplicates(search.findByTitle(searchBar.getText())));
         isProjecting = false;
         loadBackground.setDisable(false);
+        defaultBackground.setDisable(false);
         project.loadImage(background);
         setPreview(background);
         playStop.setImage(PLAY_BUTTON);
+        slideShow.clearSlides();
 
     }
 
     @FXML
     private void nextSlide() {
+        loadBackground.setDisable(true);
+        defaultBackground.setDisable(true);
+        playStop.setImage(STOP_BUTTON);
         try {
             Image currentSlide = slideShow.nextSlide();
             project.loadImage(currentSlide);
@@ -182,7 +192,9 @@ public class SearchController implements Initializable {
             Image previewSlide = slideShow.previewNextSlide();
             setPreview(previewSlide);
         } catch (RuntimeException ignored) {
-            //xD
+           playStop.setImage(PLAY_BUTTON);
+            loadBackground.setDisable(false);
+            defaultBackground.setDisable(false);
         }
     }
 

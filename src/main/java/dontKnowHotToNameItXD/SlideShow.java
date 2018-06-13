@@ -64,4 +64,8 @@ public class SlideShow {
         }
         throw new RuntimeException("Nie ma wcześniejszego slajdu");
     }
+
+    public void clearSlides() {
+        slides.clear();
+    }
 }
