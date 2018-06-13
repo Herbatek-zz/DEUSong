@@ -124,6 +124,7 @@ public class SearchController implements Initializable {
     private void playSong() throws IOException {
         if (!isProjecting) {
             isProjecting = true;
+            loadBackground.setDisable(true);
             Song song;
             if (!queueList.isEmpty()) {
                 song = queueList.get(0);
@@ -154,6 +155,7 @@ public class SearchController implements Initializable {
     private void stopSong() {
         queueTableView.getItems().setAll(queueList);
         isProjecting = false;
+        loadBackground.setDisable(false);
         project.loadImage(background);
         setPreview(background);
         Image play = new Image("buttons/play.png");
