@@ -121,18 +121,33 @@ public class SearchController implements Initializable {
     }
 
     @FXML
+   private void playButton() throws IOException
+    {
+        if(!isProjecting)
+        {
+            playSong();
+        }
+        else
+        {
+            stopSong();
+        }
+    }
+
+
+
     private void playSong() throws IOException {
-        if (!isProjecting) {
+        {
             isProjecting = true;
             loadBackground.setDisable(true);
             Song song;
             if (!queueList.isEmpty()) {
                 song = queueList.get(0);
                 slideShow.open(song);
-                queueList.remove(0);
-                queueTableView.getItems().setAll(queueList);
+
                 Image currentSlide = slideShow.currentSlide();
-                setPreview(currentSlide);
+                Image previewSlide = slideShow.previewNextSlide();
+                setPreview(previewSlide);
+
                 project.loadImage(currentSlide);
                 Image stop = new Image("buttons/stop.png");
                 playStop.setScaleX(1.1);
@@ -146,13 +161,13 @@ public class SearchController implements Initializable {
                         .showAndWait();
             }
         }
-        else stopSong();
-
 
     }
 
     @FXML
     private void stopSong() {
+        if (!queueList.isEmpty())
+        queueList.remove(0);
         queueTableView.getItems().setAll(queueList);
         isProjecting = false;
         loadBackground.setDisable(false);
@@ -169,11 +184,20 @@ public class SearchController implements Initializable {
     private void nextSlide() {
         try {
             Image currentSlide = slideShow.nextSlide();
-            setPreview(currentSlide);
+
+
             project.loadImage(currentSlide);
         } catch (RuntimeException e) {
             nextPresentation();
         }
+       try {
+           Image previewSlide = slideShow.previewNextSlide();
+           setPreview(previewSlide);
+       }
+       catch (RuntimeException ignored)
+       {
+           //xD
+       }
     }
 
     @FXML
@@ -182,18 +206,35 @@ public class SearchController implements Initializable {
             Image currentSlide = slideShow.prevSlide();
             setPreview(currentSlide);
             project.loadImage(currentSlide);
+            try {
+                Image previewSlide = slideShow.previewNextSlide();
+                setPreview(previewSlide);
+            }
+            catch (RuntimeException ignored)
+            {
+                //xD
+            }
         } catch (RuntimeException ignored) {
 
         }
     }
 
+    @FXML
     private void nextPresentation() {
         try {
             this.queueTableView.getItems().setAll(queueList);
-            if (!queueList.isEmpty())
+            queueList.remove(0);
+            if (!queueList.isEmpty()) {
+
+
+
+                queueTableView.getItems().setAll(queueList);
                 playSong();
-            else
+            }
+                else {
+
                 stopSong();
+            }
         } catch (RuntimeException e) {
             // nothing here
         } catch (IOException e) {
@@ -214,10 +255,7 @@ public class SearchController implements Initializable {
                 break;
             case NUMPAD7:
             case DIGIT7:
-                if (isProjecting)
-                    stopSong();
-                else
-                    playSong();
+               playButton();
                 break;
             case NUMPAD9:
             case DIGIT9:
