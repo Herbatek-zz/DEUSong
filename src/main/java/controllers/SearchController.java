@@ -336,9 +336,7 @@ public class SearchController implements Initializable {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/desktop"));
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                    new FileChooser.ExtensionFilter("PNG", "*.png")
-            );
+                    new FileChooser.ExtensionFilter("Pliki graficzne", "*.jpg", "*.png"));
             File file = fileChooser.showOpenDialog(null);
             if(file != null) {
                 String path = file.toURI().toString();
