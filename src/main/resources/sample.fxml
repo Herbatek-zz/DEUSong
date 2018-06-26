@@ -17,14 +17,14 @@
 
 <AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyListener" onMouseClicked="#unfocus" prefHeight="720.0" prefWidth="1280.0" styleClass="bg" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
     <children>
-        <FlowPane hgap="20.0" layoutX="480.0" layoutY="82.0" maxHeight="400.0" maxWidth="265.0" prefHeight="370.0" prefWidth="0.0" vgap="20.0">
+        <FlowPane hgap="20.0" layoutX="480.0" layoutY="82.0" maxHeight="400.0" maxWidth="285.0" prefHeight="400.0" prefWidth="0.0" vgap="20.0">
             <children>
-                <ToggleButton fx:id="allCats" mnemonicParsing="false" onAction="#allCategories" prefHeight="22.0" prefWidth="140.0" selected="true" text="Wszystkie">
+                <ToggleButton fx:id="allCats" mnemonicParsing="false" onAction="#allCategories" prefHeight="39.0" prefWidth="132.0" selected="true" text="Wszystkie">
                     <FlowPane.margin>
-                        <Insets bottom="-5.0" top="-10.0" />
+                        <Insets bottom="-10.0" />
                     </FlowPane.margin>
                     <font>
-                        <Font size="16.0" />
+                        <Font size="15.0" />
                     </font>
                     <toggleGroup>
                         <ToggleGroup fx:id="category" />
@@ -33,29 +33,29 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ToggleButton>
-                <ToggleButton fx:id="common" mnemonicParsing="false" onAction="#commonCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Zwykłe" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                <ToggleButton fx:id="common" mnemonicParsing="false" onAction="#commonCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Zwykłe" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="15.0" />
                     </font>
                     <FlowPane.margin>
-                        <Insets bottom="-5.0" top="-10.0" />
+                        <Insets bottom="-10.0" />
                     </FlowPane.margin>
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ToggleButton>
-                <ToggleButton fx:id="adwent" mnemonicParsing="false" onAction="#adwentCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Adwent" toggleGroup="$category">
+                <ToggleButton fx:id="adwent" mnemonicParsing="false" onAction="#adwentCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Adwent" toggleGroup="$category">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="15.0" />
                     </font>
                     <FlowPane.margin>
-                        <Insets top="-10.0" />
+                        <Insets bottom="-10.0" />
                     </FlowPane.margin>
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ToggleButton>
-                <ToggleButton fx:id="christmas" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="42.0" prefWidth="140.0" styleClass="button" text="Boże Narodzenie" toggleGroup="$category" wrapText="true">
+                <ToggleButton fx:id="christmas" mnemonicParsing="false" onAction="#christmasCategory" prefHeight="52.0" prefWidth="132.0" styleClass="button" text="Boże Narodzenie" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -63,62 +63,51 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                <FlowPane.margin>
-                  <Insets bottom="-5.0" top="-15.0" />
+                  <Insets bottom="-10.0" />
                </FlowPane.margin>
                 </ToggleButton>
-                <ToggleButton fx:id="post" mnemonicParsing="false" onAction="#postCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Wielki post" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                <ToggleButton fx:id="post" mnemonicParsing="false" onAction="#postCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Wielki post" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="15.0" />
                     </font>
                     <FlowPane.margin>
-                        <Insets top="-10.0" />
+                        <Insets bottom="-10.0" />
                     </FlowPane.margin>
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ToggleButton>
-                <ToggleButton fx:id="easter" mnemonicParsing="false" onAction="#easterCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Wielkanoc" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                <ToggleButton fx:id="easter" mnemonicParsing="false" onAction="#easterCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Wielkanoc" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="15.0" />
                     </font>
                     <FlowPane.margin>
-                        <Insets bottom="-5.0" top="-15.0" />
+                        <Insets bottom="-10.0" />
                     </FlowPane.margin>
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ToggleButton>
-            <ToggleButton fx:id="maryjne" contentDisplay="CENTER" layoutX="25.0" layoutY="262.0" mnemonicParsing="false" onAction="#maryjneCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Maryjne" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+            <ToggleButton fx:id="maryjne" contentDisplay="CENTER" layoutX="25.0" layoutY="262.0" mnemonicParsing="false" onAction="#maryjneCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Maryjne" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                <font>
-                  <Font size="16.0" />
+                  <Font size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <FlowPane.margin>
-                  <Insets top="-10.0" />
+                  <Insets bottom="-10.0" />
                </FlowPane.margin>
             </ToggleButton>
-                <ToggleButton fx:id="corpusChristi" contentDisplay="CENTER" mnemonicParsing="false" onAction="#corpusChristiCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Boże Ciało" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                    <FlowPane.margin>
-                        <Insets top="-15.0" />
-                    </FlowPane.margin>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ToggleButton>
-            <ToggleButton fx:id="okolicznosciowe" contentDisplay="CENTER" layoutX="25.0" layoutY="304.0" mnemonicParsing="false" onAction="#okolicznoscioweCategory" prefHeight="22.0" prefWidth="140.0" styleClass="button" text="Okolicznościowe" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+            <ToggleButton fx:id="okolicznosciowe" contentDisplay="CENTER" layoutX="25.0" layoutY="304.0" mnemonicParsing="false" onAction="#okolicznoscioweCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Okolicznościowe" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                <font>
-                  <Font size="16.0" />
+                  <Font size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <FlowPane.margin>
-                  <Insets top="-15.0" />
+                  <Insets bottom="-10.0" />
                </FlowPane.margin>
             </ToggleButton>
             </children>

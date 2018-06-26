@@ -16,9 +16,8 @@ public class Search {
             new Filter("adwent", true), //3
             new Filter("boze narodzenie", true), //4
             new Filter("", true), //5
-            new Filter("boże ciało", true), //6
-            new Filter("maryjne", true), //7
-            new Filter("okolicznosciowe", true), // 8
+            new Filter("maryjne", true), // 6
+            new Filter("okolicznosciowe", true), // 7
     };
 
     private List<Song> songs = new ArrayList<>();
