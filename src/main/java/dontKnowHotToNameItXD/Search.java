@@ -14,9 +14,11 @@ public class Search {
             new Filter("wielki post", true), //1
             new Filter("wielkanoc", true), //2
             new Filter("adwent", true), //3
-            new Filter("koledy", true), //4
+            new Filter("boze narodzenie", true), //4
             new Filter("", true), //5
-            new Filter("swiety", true), //6
+            new Filter("boże ciało", true), //6
+            new Filter("maryjne", true), //7
+            new Filter("okolicznosciowe", true), // 8
     };
 
     private List<Song> songs = new ArrayList<>();

@@ -256,7 +256,7 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void traditionalCategory() {
+    private void commonCategory() {
         setFilters(0);
         searchSong();
     }
@@ -292,8 +292,20 @@ public class SearchController implements Initializable {
     }
 
     @FXML
-    private void saintCategory() {
+    private void corpusChristiCategory() {
         setFilters(6);
+        searchSong();
+    }
+
+    @FXML
+    private void maryjneCategory() {
+        setFilters(7);
+        searchSong();
+    }
+
+    @FXML
+    private void okolicznoscioweCategory() {
+        setFilters(8);
         searchSong();
     }
 
