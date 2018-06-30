@@ -40,9 +40,6 @@ public class SearchController implements Initializable {
     private TableView<Song> queueTableView;
 
     @FXML
-    private TableColumn<Song, String> queueCategoryColumn;
-
-    @FXML
     private TableColumn<Song, String> queueNameColumn;
 
     @FXML
@@ -348,7 +345,6 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        queueCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         queueNameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         searchCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));

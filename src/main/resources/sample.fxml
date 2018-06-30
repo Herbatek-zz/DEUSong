@@ -120,7 +120,6 @@
                 <Label text="" />
             </placeholder>
             <columns>
-                <TableColumn fx:id="queueCategoryColumn" prefWidth="127.0" text="Kategoria" />
                 <TableColumn fx:id="queueNameColumn" prefWidth="239.0" text="Nazwa pieśni" />
             </columns>
             <columnResizePolicy>
