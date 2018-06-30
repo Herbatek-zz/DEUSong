@@ -62,9 +62,9 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
-               <FlowPane.margin>
-                  <Insets bottom="-10.0" />
-               </FlowPane.margin>
+                    <FlowPane.margin>
+                        <Insets bottom="-10.0" />
+                    </FlowPane.margin>
                 </ToggleButton>
                 <ToggleButton fx:id="post" mnemonicParsing="false" onAction="#postCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Wielki post" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
                     <font>
@@ -88,28 +88,28 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ToggleButton>
-            <ToggleButton fx:id="maryjne" contentDisplay="CENTER" layoutX="25.0" layoutY="262.0" mnemonicParsing="false" onAction="#maryjneCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Maryjne" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <FlowPane.margin>
-                  <Insets bottom="-10.0" />
-               </FlowPane.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="okolicznosciowe" contentDisplay="CENTER" layoutX="25.0" layoutY="304.0" mnemonicParsing="false" onAction="#okolicznoscioweCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Okolicznościowe" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <FlowPane.margin>
-                  <Insets bottom="-10.0" />
-               </FlowPane.margin>
-            </ToggleButton>
+                <ToggleButton fx:id="maryjne" contentDisplay="CENTER" layoutX="25.0" layoutY="262.0" mnemonicParsing="false" onAction="#maryjneCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Maryjne" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <FlowPane.margin>
+                        <Insets bottom="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
+                <ToggleButton fx:id="okolicznosciowe" contentDisplay="CENTER" layoutX="25.0" layoutY="304.0" mnemonicParsing="false" onAction="#okolicznoscioweCategory" prefHeight="39.0" prefWidth="132.0" styleClass="button" text="Okolicznościowe" textAlignment="CENTER" toggleGroup="$category" wrapText="true">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <FlowPane.margin>
+                        <Insets bottom="-10.0" />
+                    </FlowPane.margin>
+                </ToggleButton>
             </children>
             <padding>
                 <Insets left="15.0" right="5.0" top="5.0" />
@@ -135,13 +135,13 @@
         </ToggleButton> <!--- Tutaj jest przycisk trybu jasny/ciemny -->
         <ImageView fx:id="imagePreview" fitHeight="400.0" fitWidth="607.0" layoutX="640.0" layoutY="67.0" pickOnBounds="true">
         </ImageView>
-        <TableView fx:id="searchTableView" layoutX="20.0" layoutY="89.0" prefHeight="359.0" prefWidth="467.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
+        <TableView fx:id="searchTableView" layoutX="20.0" layoutY="89.0" prefHeight="359.0" prefWidth="470.0"> <!--- Tutaj jest wczytywana lista wyszukanych piosenek -->
             <placeholder>
                 <Label text="" />
             </placeholder>
             <columns>
-                <TableColumn fx:id="searchCategoryColumn" prefWidth="75.0" text="Kategoria" />
-                <TableColumn fx:id="searchTitleColumn" prefWidth="390.0" text="Nazwa pieśni" />
+                <TableColumn fx:id="searchCategoryColumn" editable="false" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Kategoria" />
+                <TableColumn fx:id="searchTitleColumn" editable="false" maxWidth="393.0" minWidth="379.0" prefWidth="379.0" resizable="false" text="Nazwa pieśni" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -175,14 +175,14 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <Button fx:id="loadBackground" layoutX="1070.0" layoutY="546.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wczytaj tło">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+        <Button fx:id="loadBackground" layoutX="1070.0" layoutY="546.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Wczytaj tło">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
         <Button layoutX="44.0" layoutY="596.0" mnemonicParsing="false" onAction="#playButton">
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -219,26 +219,26 @@
                 </ImageView>
             </graphic>
         </Button>
-      <Button layoutX="334.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextPresentation">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
-               <image>
-                  <Image url="@buttons/nextSong.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="defaultBackground" layoutX="1070.0" layoutY="606.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Domyślne tło">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+        <Button layoutX="334.0" layoutY="596.0" mnemonicParsing="false" onAction="#nextPresentation">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="64" fitWidth="64" scaleX="0.7" scaleY="0.7">
+                    <image>
+                        <Image url="@buttons/nextSong.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="defaultBackground" layoutX="1070.0" layoutY="606.0" mnemonicParsing="false" onAction="#clearQueue" prefHeight="48.0" prefWidth="169.0" text="Domyślne tło">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
     </children>
 
 </AnchorPane>
